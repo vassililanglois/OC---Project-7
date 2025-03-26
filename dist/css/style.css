@@ -29,6 +29,15 @@
 .main-searchbar .search-icon-container svg line {
   stroke: white;
 }
+.main-searchbar .search-icon-container:hover, .main-searchbar .search-icon-container:active, .main-searchbar .search-icon-container:focus {
+  background-color: #ffd15b;
+}
+.main-searchbar .search-icon-container:hover svg circle,
+.main-searchbar .search-icon-container:hover svg line, .main-searchbar .search-icon-container:active svg circle,
+.main-searchbar .search-icon-container:active svg line, .main-searchbar .search-icon-container:focus svg circle,
+.main-searchbar .search-icon-container:focus svg line {
+  stroke: #1b1b1b;
+}
 
 /***** Config *****/
 *,
@@ -114,6 +123,20 @@ header h1 {
   color: #ffd15b;
   font-size: 2.75rem;
   font-family: "Anton", sans-serif;
+}
+
+/***** Main *****/
+main {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+main .section-filtres {
+  display: flex;
+  justify-content: space-between;
+}
+main .section-filtres .nombre-recettes {
+  font-family: "Anton", sans-serif;
+  font-size: 1.3125rem;
 }
 
 /*# sourceMappingURL=style.css.map */

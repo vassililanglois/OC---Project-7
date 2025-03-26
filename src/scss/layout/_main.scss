@@ -1,0 +1,18 @@
+@use "../config/variables";
+
+/***** Main *****/
+
+main {
+  padding-left: 100px;
+  padding-right: 100px;
+
+  .section-filtres {
+    display: flex;
+    justify-content: space-between;
+
+    .nombre-recettes {
+      font-family: "Anton", sans-serif;
+      font-size: 1.3125rem;
+    }
+  }
+}

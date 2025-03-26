@@ -31,5 +31,18 @@
         stroke: white;
       }
     }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: variables.$yellow;
+
+      svg {
+        circle,
+        line {
+          stroke: variables.$black;
+        }
+      }
+    }
   }
 }
