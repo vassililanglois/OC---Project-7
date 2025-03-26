@@ -1,3 +1,14 @@
-h1 {
-  font-size: 5rem;
-}
+/***** Components *****/
+
+@use "components/card";
+@use "components/filter";
+@use "components/searchbar";
+
+/***** Config *****/
+
+@use "config/reset";
+@use "config/variables";
+
+/***** Layout *****/
+
+@use "layout/header.scss";

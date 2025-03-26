@@ -1,0 +1,30 @@
+@use "../config/variables";
+
+.main-searchbar {
+  width: 954px;
+  height: 72px;
+  background-color: white;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  input {
+    width: 100%;
+    height: 100%;
+    color: variables.$grey;
+  }
+  .search-icon-container {
+    background-color: variables.$black;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+
+    svg {
+      color: white;
+    }
+  }
+}

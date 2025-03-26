@@ -1,0 +1,22 @@
+@use "../config/variables";
+
+/***** Header *****/
+
+header {
+  background-image: url(/src/assets/images/lampos-aritonang-24gR_9lCdes-unsplash\ 1.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 667px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    color: variables.$yellow;
+    font-size: 2.75rem;
+    font-family: "Anton", sans-serif;
+  }
+}

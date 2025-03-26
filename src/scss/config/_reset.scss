@@ -1,0 +1,68 @@
+@use "variables";
+
+// Global Reset SCSS
+// Réinitialisation des marges et paddings
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Styles de base
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: variables.$light-grey;
+  color: variables.$black;
+}
+
+// Titres sans marges ni style par défaut
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+// Listes et liens sans styles par défaut
+ul,
+ol,
+li,
+a {
+  list-style: none;
+  text-decoration: none;
+}
+
+// Tableaux sans espace entre les bordures
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+// Réinitialisation des formulaires (inputs, boutons, etc.)
+input,
+button,
+select,
+textarea {
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Images responsives
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
