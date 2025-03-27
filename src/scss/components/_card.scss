@@ -1,67 +1,67 @@
 @use "../config/variables";
 
-.section-recettes {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 5%;
+.recette {
+  border-radius: 21px;
+  background-color: white;
+  position: relative;
 
-  .recette {
-    border-radius: 21px;
-    background-color: white;
-    position: relative;
+  p {
+    font-size: 0.875rem;
+  }
+  .recette-time {
+    position: absolute;
+    top: 21px;
+    right: 21px;
+    background-color: variables.$yellow;
+    padding: 5px 15px;
+    border-radius: 14px;
+  }
 
-    p {
-      font-size: 0.875rem;
+  img {
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+  }
+
+  .recette-info-container {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    .recette-title {
+      font-family: "Anton", sans-serif;
+      font-size: 1.125rem;
     }
-    .recette-time {
-      position: absolute;
-      top: 21px;
-      right: 21px;
-      background-color: variables.$yellow;
-      padding: 5px 15px;
-      border-radius: 14px;
-    }
 
-    img {
-      object-fit: cover;
-      height: 250px;
-      width: 100%;
-      border-top-left-radius: 21px;
-      border-top-right-radius: 21px;
+    .recette-info-title {
+      color: variables.$grey;
+      font-size: 0.75rem;
+      font-weight: 700;
     }
-
-    .recette-info-container {
-      padding: 25px;
+    .recette-preparation {
       display: flex;
       flex-direction: column;
-      gap: 32px;
-      .recette-title {
-        font-family: "Anton", sans-serif;
-        font-size: 1.125rem;
-      }
+      gap: 10px;
 
-      .recette-info-title {
-        color: variables.$grey;
-        font-size: 0.75rem;
-        font-weight: 700;
+      p {
+        max-height: 5.25rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      .recette-preparation {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
+    }
 
-      .recette-ingredients {
-        display: flex;
-        flex-direction: column;
+    .recette-ingredients {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .info-ingredients {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        .info-ingredient {
-          .ingredient-name {
-          }
-          .ingredient-quantity {
-            color: variables.$grey;
-          }
+        .ingredient-quantity {
+          color: variables.$grey;
         }
       }
     }

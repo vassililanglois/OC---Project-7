@@ -6,6 +6,7 @@ const sectionRecettes = document.querySelector(".section-recettes");
 export function displayRecipeCards(recipes) {
   recipes.forEach((recipe) => {
     const card = createRecipeCard(recipe);
+
     sectionRecettes.appendChild(card);
   });
 }

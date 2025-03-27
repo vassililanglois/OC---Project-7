@@ -1,12 +1,21 @@
-/*
- * *********************
- * Module qui gère la partie affichage des cartes de recette
- * *********************
- */
-
 export function createRecipeCard(recipe) {
   const recette = document.createElement("article");
   recette.classList.add("recette");
+
+  // Génération dynamique des ingrédients
+  const ingredient = recipe.ingredients
+    .map((item) => {
+      const name = item.ingredient;
+      const quantity = item.quantity ? `${item.quantity}` : "";
+      const unit = item.unit ? ` ${item.unit}` : "";
+      return `
+            <div>
+            <p class="ingredient-name">${name}</p>
+            <p class="ingredient-quantity">${quantity}${unit}</p>
+            </div>
+             `;
+    })
+    .join("");
 
   // Construction de la carte HTML
   recette.innerHTML = `
@@ -25,9 +34,8 @@ export function createRecipeCard(recipe) {
               </div>
               <div class="recette-ingredients">
                 <h3 class="recette-info-title">INGRÉDIENTS</h3>
-                <div class="info-ingredient">
-                  <p class="ingredient-name">Lait de coco</p>
-                  <p class="ingredient-quantity">400mL</p>
+                <div class="info-ingredients">
+                  ${ingredient}
                 </div>
               </div>
             </div>

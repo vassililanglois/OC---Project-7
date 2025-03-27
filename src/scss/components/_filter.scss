@@ -1,1 +1,76 @@
 @use "../config/variables";
+
+.filtres {
+  display: flex;
+  gap: 63px;
+  .filtre-container {
+    background-color: white;
+    border-radius: 11px;
+    max-width: 195px;
+    max-height: 56px;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    overflow: hidden;
+    transition: max-height 0.3 ease-in-out;
+
+    &.open {
+      max-height: 315px;
+    }
+
+    .filtre-title {
+      height: 56px;
+      padding: 17px 16px;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .arrow {
+        width: 1rem;
+        transition: transform 0.3s ease;
+      }
+      .rotate {
+        transform: rotate(180deg);
+      }
+    }
+
+    .filtre-searching {
+      padding: 0 10%;
+      height: 56px;
+
+      .filtre-searchbar {
+        display: flex;
+        border-radius: 2px;
+        border: solid 1px variables.$light-grey;
+        padding: 5%;
+        height: 2.25rem;
+
+        input {
+          width: 100%;
+          caret-color: variables.$light-grey;
+        }
+
+        svg {
+          height: fit-content;
+          width: 0.875rem;
+        }
+      }
+    }
+
+    .selected-ingredients {
+      div {
+        background-color: variables.$yellow;
+        padding: 5%;
+        font-size: 0.875rem;
+      }
+    }
+
+    .filtre-ingredients {
+      div {
+        padding: 5%;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

@@ -3,15 +3,30 @@
 /***** Main *****/
 
 main {
-  margin: 0 100px;
-
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 7%;
+  }
   .section-filtres {
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
 
     .nombre-recettes {
       font-family: "Anton", sans-serif;
       font-size: 1.3125rem;
     }
+  }
+
+  .section-recettes {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 50px;
+    margin-top: 25px;
   }
 }
