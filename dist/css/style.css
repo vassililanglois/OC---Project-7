@@ -1,5 +1,63 @@
 /***** Components *****/
 /***** Variables de couleur *****/
+.section-recettes {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5%;
+}
+.section-recettes .recette {
+  border-radius: 21px;
+  background-color: white;
+  position: relative;
+}
+.section-recettes .recette p {
+  font-size: 0.875rem;
+}
+.section-recettes .recette .recette-time {
+  position: absolute;
+  top: 21px;
+  right: 21px;
+  background-color: #ffd15b;
+  padding: 5px 15px;
+  border-radius: 14px;
+}
+.section-recettes .recette img {
+  object-fit: cover;
+  height: 250px;
+  width: 100%;
+  border-top-left-radius: 21px;
+  border-top-right-radius: 21px;
+}
+.section-recettes .recette .recette-info-container {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.section-recettes .recette .recette-info-container .recette-title {
+  font-family: "Anton", sans-serif;
+  font-size: 1.125rem;
+}
+.section-recettes .recette .recette-info-container .recette-info-title {
+  color: #7a7a7a;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.section-recettes .recette .recette-info-container .recette-preparation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.section-recettes .recette .recette-info-container .recette-ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.section-recettes .recette .recette-info-container .recette-ingredients .info-ingredient .ingredient-quantity {
+  color: #7a7a7a;
+}
+
 .main-searchbar {
   width: 954px;
   height: 72px;
@@ -127,8 +185,7 @@ header h1 {
 
 /***** Main *****/
 main {
-  padding-left: 100px;
-  padding-right: 100px;
+  margin: 0 100px;
 }
 main .section-filtres {
   display: flex;
