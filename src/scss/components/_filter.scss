@@ -11,8 +11,9 @@
     height: 100%;
     width: 100%;
     font-size: 1rem;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
+    overflow-y: auto;
+    scrollbar-width: none;
+    transition: max-height 0.3s ease;
 
     &.open {
       max-height: 315px;
@@ -58,7 +59,7 @@
       }
     }
 
-    .selected-ingredients {
+    .selected-elements {
       div {
         background-color: variables.$yellow;
         padding: 5%;
@@ -66,10 +67,14 @@
       }
     }
 
-    .filtre-ingredients {
+    .filtre-elements {
       div {
         padding: 5%;
         font-size: 0.875rem;
+
+        &:hover {
+          background-color: variables.$yellow;
+        }
       }
     }
   }

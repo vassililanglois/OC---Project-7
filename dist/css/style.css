@@ -74,8 +74,9 @@
   height: 100%;
   width: 100%;
   font-size: 1rem;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
+  overflow-y: auto;
+  scrollbar-width: none;
+  transition: max-height 0.3s ease;
 }
 .filtres .filtre-container.open {
   max-height: 315px;
@@ -114,14 +115,17 @@
   height: fit-content;
   width: 0.875rem;
 }
-.filtres .filtre-container .selected-ingredients div {
+.filtres .filtre-container .selected-elements div {
   background-color: #ffd15b;
   padding: 5%;
   font-size: 0.875rem;
 }
-.filtres .filtre-container .filtre-ingredients div {
+.filtres .filtre-container .filtre-elements div {
   padding: 5%;
   font-size: 0.875rem;
+}
+.filtres .filtre-container .filtre-elements div:hover {
+  background-color: #ffd15b;
 }
 
 .main-searchbar {
