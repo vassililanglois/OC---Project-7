@@ -25,8 +25,8 @@ main {
   .section-recettes {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     margin-top: 25px;
+    gap: 48px;
   }
 }
