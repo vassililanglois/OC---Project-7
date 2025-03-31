@@ -3,78 +3,120 @@
 .filtres {
   display: flex;
   gap: 63px;
-  .filtre-container {
-    background-color: white;
-    border-radius: 11px;
-    max-width: 195px;
-    max-height: 56px;
-    height: 100%;
-    width: 100%;
-    font-size: 1rem;
-    overflow-y: auto;
-    scrollbar-width: none;
-    transition: max-height 0.3s ease;
 
-    &.open {
-      max-height: 315px;
+  .filtre-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .filtre-container {
+      background-color: white;
+      border-radius: 11px;
+      max-width: 195px;
+      max-height: 56px;
+      height: 100%;
+      width: 100%;
+      font-size: 1rem;
+      overflow-y: auto;
+      scrollbar-width: none;
+      transition: max-height 0.3s ease;
+
+      &.open {
+        max-height: 315px;
+      }
+
+      .filtre-title {
+        height: 56px;
+        padding: 17px 16px;
+        font-size: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .arrow {
+          height: fit-content;
+          width: 1rem;
+          transition: transform 0.3s ease;
+        }
+        .rotate {
+          transform: rotate(180deg);
+        }
+      }
+
+      .filtre-searching {
+        padding: 0 10%;
+        height: 56px;
+
+        .filtre-searchbar {
+          display: flex;
+          border-radius: 2px;
+          border: solid 1px variables.$light-grey;
+          padding: 5%;
+          height: 2.25rem;
+
+          input {
+            width: 100%;
+            caret-color: variables.$light-grey;
+          }
+
+          svg {
+            height: fit-content;
+            width: 0.875rem;
+          }
+        }
+      }
+
+      .selected-elements {
+        margin-bottom: 20px;
+        div {
+          background-color: variables.$yellow;
+          padding: 5%;
+          font-size: 0.875rem;
+          display: flex;
+          justify-content: space-between;
+
+          .unselect-filter-element {
+            display: none;
+          }
+
+          &:hover {
+            font-weight: 700;
+
+            .unselect-filter-element {
+              display: block;
+              width: 17px;
+            }
+          }
+        }
+      }
+
+      .filtre-elements {
+        div {
+          padding: 5%;
+          font-size: 0.875rem;
+
+          .unselect-filter-element {
+            display: none;
+          }
+
+          &:hover {
+            background-color: variables.$yellow;
+          }
+        }
+      }
     }
 
-    .filtre-title {
-      height: 56px;
-      padding: 17px 16px;
-      font-size: 1rem;
+    .filtre-element-tag {
+      background-color: variables.$yellow;
+      padding: 17px 18px;
+      font-size: 0.875rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-radius: 10px;
 
-      .arrow {
-        width: 1rem;
-        transition: transform 0.3s ease;
-      }
-      .rotate {
-        transform: rotate(180deg);
-      }
-    }
-
-    .filtre-searching {
-      padding: 0 10%;
-      height: 56px;
-
-      .filtre-searchbar {
-        display: flex;
-        border-radius: 2px;
-        border: solid 1px variables.$light-grey;
-        padding: 5%;
-        height: 2.25rem;
-
-        input {
-          width: 100%;
-          caret-color: variables.$light-grey;
-        }
-
-        svg {
-          height: fit-content;
-          width: 0.875rem;
-        }
-      }
-    }
-
-    .selected-elements {
-      div {
-        background-color: variables.$yellow;
-        padding: 5%;
-        font-size: 0.875rem;
-      }
-    }
-
-    .filtre-elements {
-      div {
-        padding: 5%;
-        font-size: 0.875rem;
-
-        &:hover {
-          background-color: variables.$yellow;
-        }
+      svg {
+        height: fit-content;
+        width: 0.625rem;
       }
     }
   }
