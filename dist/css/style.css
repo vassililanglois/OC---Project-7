@@ -145,6 +145,9 @@
   display: block;
   width: 17px;
 }
+.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-elements {
+  margin-bottom: 20px;
+}
 .filtres .filtre-area .filtre-container .filtre-elements-section .filtre-elements div {
   padding: 5%;
   font-size: 0.875rem;
