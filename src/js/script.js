@@ -41,7 +41,7 @@ globalSearchInput.addEventListener("input", (event) => {
     // Si la barre de recherche est vide, afficher toutes les recettes
     displayRecipeCards(recipes);
     setNumberOfRecipes(recipes);
-    eraseErrorMessage();
+    eraseErrorMessage(); // Effacer le message d'erreur
     updateFilters(recipes); // Mettre à jour les filtres avec toutes les recettes
   } else {
     // Si un mot-clé est saisi, vider la section des recettes et afficher les résultats filtrés
@@ -50,16 +50,18 @@ globalSearchInput.addEventListener("input", (event) => {
       const filteredRecipes = globalSearch(keyword); // Récupérer les recettes filtrées
       displayRecipeCards(filteredRecipes); // Afficher les recettes filtrées
       setNumberOfRecipes(filteredRecipes); // Mettre à jour le nombre de recettes affichées
+      updateFilters(filteredRecipes); // Mettre à jour les filtres avec les recettes filtrées
 
       if (filteredRecipes.length === 0) {
-        displayErrorMessage();
+        displayErrorMessage(keyword); // Afficher le message d'erreur si aucune recette n'est trouvée
+      } else {
+        eraseErrorMessage(); // Effacer le message d'erreur si des recettes sont trouvées
       }
-
-      updateFilters(filteredRecipes); // Mettre à jour les filtres avec les recettes filtrées
     } else {
       console.log("Mot-clé trop court (moins de 3 caractères)");
       setNumberOfRecipes([]); // Mettre à jour le nombre de recettes à 0
       updateFilters([]); // Vider les filtres
+      eraseErrorMessage(); // Effacer le message d'erreur
     }
   }
 });

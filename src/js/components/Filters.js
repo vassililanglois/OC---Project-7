@@ -22,7 +22,7 @@ fillFilters(allAppliances, filterAppliances);
 fillFilters(allUstensils, filterUstensils);
 
 // Fonction pour remplir les filtres
-function fillFilters(filterElements, filterElementsContainer) {
+export function fillFilters(filterElements, filterElementsContainer) {
   filterElementsContainer.innerHTML = ""; // Réinitialiser le container
   filterElements.forEach((el) => {
     const filterItem = document.createElement("div");
@@ -32,7 +32,7 @@ function fillFilters(filterElements, filterElementsContainer) {
 }
 
 // Fonction pour récupérer les éléments des filtres
-function getFiltersElements(recipes) {
+export function getFiltersElements(recipes) {
   // Set uniques pour éviter les doublons
   const allIngredients = [
     ...new Set(

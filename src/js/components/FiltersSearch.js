@@ -1,18 +1,38 @@
-// Fonction permettant de rechercher un tag dans un filtre
+import { getFiltersElements } from "./Filters.js";
+import { fillFilters } from "./Filters.js"; // Importer la fonction fillFilters
+import { recipes } from "/src/data/recipes.js";
 
-function searchingTag(input, listItems) {
-  const searchbarTag = input;
+// Sélectionner les barres de recherche et les containers correspondants
+const searchbarIngredients = document.getElementById("searchbar-ingredients");
+const searchbarAppliances = document.getElementById("searchbar-appliances");
+const searchbarUstensils = document.getElementById("searchbar-ustensils");
 
-  // Écoute les changements dans l'input
-  searchbarTag.addEventListener("input", () => {
-    const filterValue = searchbarTag.value.toLowerCase(); // Récupère la valeur de l'input en minuscule
+const filterIngredientsContainer = document.querySelector(
+  ".filtre-elements.filtre-ingredients"
+);
+const filterAppliancesContainer = document.querySelector(
+  ".filtre-elements.filtre-appliances"
+);
+const filterUstensilsContainer = document.querySelector(
+  ".filtre-elements.filtre-ustensils"
+);
 
-    // Parcourt chaque élément de la liste
-    listItems.forEach((item) => {
-      const text = item.textContent.toLowerCase(); // Récupère le texte de l'élément en minuscule
+// Récupérer les listes des filtres
+const { allIngredients, allAppliances, allUstensils } =
+  getFiltersElements(recipes);
 
-      // Affiche ou masque l'élément en fonction de la correspondance avec la valeur de l'input
-      item.style.display = text.includes(filterValue) ? "block" : "none";
-    });
+// Fonction pour rechercher dans les filtres
+function filterSearch(input, list, container) {
+  input.addEventListener("input", () => {
+    const keyword = input.value.trim().toLowerCase(); // Récupérer la valeur de l'input
+    const filteredList = list.filter((item) =>
+      item.toLowerCase().includes(keyword)
+    ); // Filtrer la liste en fonction du mot-clé
+    fillFilters(filteredList, container); // Mettre à jour les éléments affichés
   });
 }
+
+// Initialiser la recherche pour chaque filtre
+filterSearch(searchbarIngredients, allIngredients, filterIngredientsContainer);
+filterSearch(searchbarAppliances, allAppliances, filterAppliancesContainer);
+filterSearch(searchbarUstensils, allUstensils, filterUstensilsContainer);
