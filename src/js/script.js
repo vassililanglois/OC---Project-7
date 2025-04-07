@@ -8,6 +8,10 @@ import {
   globalSearchInput,
   isKeywordValid,
 } from "./components/GlobalSearch.js";
+import {
+  displayErrorMessage,
+  eraseErrorMessage,
+} from "./utils/noRecipeFound.js";
 
 // Fonction pour afficher les cartes de recettes
 function displayRecipeCards(recipes) {
@@ -36,6 +40,7 @@ globalSearchInput.addEventListener("input", (event) => {
     // Si la barre de recherche est vide, afficher toutes les recettes
     displayRecipeCards(recipes);
     setNumberOfRecipes(recipes);
+    eraseErrorMessage();
   } else {
     // Si un mot-clé est saisi, vider la section des recettes et afficher les résultats filtrés
     sectionRecettes.innerHTML = ""; // Vider la section des recettes
@@ -43,6 +48,10 @@ globalSearchInput.addEventListener("input", (event) => {
       const filteredRecipes = globalSearch(keyword); // Récupérer les recettes filtrées
       displayRecipeCards(filteredRecipes); // Afficher les recettes filtrées
       setNumberOfRecipes(filteredRecipes); // Mettre à jour le nombre de recettes affichées
+
+      if (filteredRecipes.length === 0) {
+        displayErrorMessage(keyword);
+      }
     } else {
       console.log("Mot-clé trop court (moins de 3 caractères)");
       setNumberOfRecipes([]); // Mettre à jour le nombre de recettes à 0

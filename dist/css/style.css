@@ -313,6 +313,20 @@ main .section-filtres .nombre-recettes {
   font-family: "Anton", sans-serif;
   font-size: 1.3125rem;
 }
+main .error-message {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+}
+main .error-message svg {
+  width: 2rem;
+}
+main .error-message p {
+  text-align: center;
+}
 main .section-recettes {
   width: 100%;
   display: grid;
