@@ -8,6 +8,7 @@ import {
   globalSearchInput,
   isKeywordValid,
 } from "./components/GlobalSearch.js";
+import { updateFilters } from "./components/Filters.js";
 import {
   displayErrorMessage,
   eraseErrorMessage,
@@ -41,6 +42,7 @@ globalSearchInput.addEventListener("input", (event) => {
     displayRecipeCards(recipes);
     setNumberOfRecipes(recipes);
     eraseErrorMessage();
+    updateFilters(recipes); // Mettre à jour les filtres avec toutes les recettes
   } else {
     // Si un mot-clé est saisi, vider la section des recettes et afficher les résultats filtrés
     sectionRecettes.innerHTML = ""; // Vider la section des recettes
@@ -50,11 +52,14 @@ globalSearchInput.addEventListener("input", (event) => {
       setNumberOfRecipes(filteredRecipes); // Mettre à jour le nombre de recettes affichées
 
       if (filteredRecipes.length === 0) {
-        displayErrorMessage(keyword);
+        displayErrorMessage();
       }
+
+      updateFilters(filteredRecipes); // Mettre à jour les filtres avec les recettes filtrées
     } else {
       console.log("Mot-clé trop court (moins de 3 caractères)");
       setNumberOfRecipes([]); // Mettre à jour le nombre de recettes à 0
+      updateFilters([]); // Vider les filtres
     }
   }
 });

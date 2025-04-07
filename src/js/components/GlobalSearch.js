@@ -27,6 +27,5 @@ export function globalSearch(keyword) {
     }
   });
 
-  console.log(filteredRecipes);
   return filteredRecipes;
 }

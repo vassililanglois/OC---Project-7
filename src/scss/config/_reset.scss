@@ -19,6 +19,11 @@ body {
   color: variables.$black;
 }
 
+// Forcer l'affichage de la scrollbar
+html {
+  overflow-y: scroll; // Toujours afficher la scrollbar verticale
+}
+
 // Titres sans marges ni style par défaut
 h1,
 h2,

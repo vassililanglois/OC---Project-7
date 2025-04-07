@@ -13,7 +13,7 @@ const filterUstensils = document.querySelector(
 );
 
 // Récupérer les listes des filtres
-const { allIngredients, allAppliances, allUstensils } =
+let { allIngredients, allAppliances, allUstensils } =
   getFiltersElements(recipes);
 
 // Remplir les filtres avec les listes correspondantes
@@ -21,7 +21,9 @@ fillFilters(allIngredients, filterIngredients);
 fillFilters(allAppliances, filterAppliances);
 fillFilters(allUstensils, filterUstensils);
 
+// Fonction pour remplir les filtres
 function fillFilters(filterElements, filterElementsContainer) {
+  filterElementsContainer.innerHTML = ""; // Réinitialiser le container
   filterElements.forEach((el) => {
     const filterItem = document.createElement("div");
     filterItem.textContent = el;
@@ -29,6 +31,7 @@ function fillFilters(filterElements, filterElementsContainer) {
   });
 }
 
+// Fonction pour récupérer les éléments des filtres
 function getFiltersElements(recipes) {
   // Set uniques pour éviter les doublons
   const allIngredients = [
@@ -39,15 +42,11 @@ function getFiltersElements(recipes) {
     ),
   ];
 
-  console.log(allIngredients);
-
   const allAppliances = [
     ...new Set(
       recipes.map((recipe) => capitalizeFirstLetter(recipe.appliance))
     ),
   ];
-
-  console.log(allAppliances);
 
   const allUstensils = [
     ...new Set(
@@ -57,7 +56,16 @@ function getFiltersElements(recipes) {
     ),
   ];
 
-  console.log(allUstensils);
-
   return { allIngredients, allAppliances, allUstensils };
+}
+
+// Fonction pour actualiser les filtres en fonction des recettes filtrées
+export function updateFilters(filteredRecipes) {
+  const { allIngredients, allAppliances, allUstensils } =
+    getFiltersElements(filteredRecipes);
+
+  // Mettre à jour les filtres affichés
+  fillFilters(allIngredients, filterIngredients);
+  fillFilters(allAppliances, filterAppliances);
+  fillFilters(allUstensils, filterUstensils);
 }
