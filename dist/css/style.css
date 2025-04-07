@@ -66,12 +66,7 @@
   display: flex;
   gap: 63px;
 }
-.filtres .filtre-area {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.filtres .filtre-area .filtre-container {
+.filtres .filtre-container {
   background-color: white;
   border-radius: 11px;
   max-width: 195px;
@@ -80,12 +75,14 @@
   width: 100%;
   font-size: 1rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   transition: max-height 0.3s ease;
 }
-.filtres .filtre-area .filtre-container.open {
+.filtres .filtre-container.open {
   max-height: 315px;
 }
-.filtres .filtre-area .filtre-container .filtre-title {
+.filtres .filtre-container .filtre-title {
   height: 56px;
   padding: 17px 16px;
   font-size: 1rem;
@@ -93,69 +90,78 @@
   justify-content: space-between;
   align-items: center;
 }
-.filtres .filtre-area .filtre-container .filtre-title .arrow {
+.filtres .filtre-container .filtre-title .arrow {
   height: fit-content;
   width: 1rem;
   transition: transform 0.3s ease;
 }
-.filtres .filtre-area .filtre-container .filtre-title .rotate {
+.filtres .filtre-container .filtre-title .rotate {
   transform: rotate(180deg);
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section {
+.filtres .filtre-container .filtre-elements-section {
   overflow-y: scroll;
   scrollbar-width: none;
   height: 259px;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-searching {
+.filtres .filtre-container .filtre-elements-section .filtre-searching {
   padding: 0 10%;
   height: 56px;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar {
+.filtres .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar {
   display: flex;
   border-radius: 2px;
   border: solid 1px #e5e5e5;
   padding: 5%;
   height: 2.25rem;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar input {
+.filtres .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar input {
   width: 100%;
   caret-color: #e5e5e5;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar svg {
+.filtres .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar svg {
   height: fit-content;
   width: 0.875rem;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .selected-elements {
+.filtres .filtre-container .filtre-elements-section .selected-elements {
   margin-bottom: 20px;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .selected-elements div {
+.filtres .filtre-container .filtre-elements-section .selected-elements div {
   background-color: #ffd15b;
   padding: 5%;
   font-size: 0.875rem;
   display: flex;
   justify-content: space-between;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .selected-elements div .unselect-filter-element {
+.filtres .filtre-container .filtre-elements-section .selected-elements div .unselect-filter-element {
   display: none;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .selected-elements div:hover {
+.filtres .filtre-container .filtre-elements-section .selected-elements div:hover {
   font-weight: 700;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .selected-elements div:hover .unselect-filter-element {
+.filtres .filtre-container .filtre-elements-section .selected-elements div:hover .unselect-filter-element {
   display: block;
   width: 17px;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-elements div {
+.filtres .filtre-container .filtre-elements-section .filtre-elements div {
   padding: 5%;
   font-size: 0.875rem;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-elements div .unselect-filter-element {
+.filtres .filtre-container .filtre-elements-section .filtre-elements div .unselect-filter-element {
   display: none;
 }
-.filtres .filtre-area .filtre-container .filtre-elements-section .filtre-elements div:hover {
+.filtres .filtre-container .filtre-elements-section .filtre-elements div:hover {
   background-color: #ffd15b;
 }
-.filtres .filtre-area .filtre-element-tag {
+
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 20px;
+  width: 100%;
+}
+.filter-tags .filtre-element-tag {
+  width: 195px;
   background-color: #ffd15b;
   padding: 17px 18px;
   font-size: 0.875rem;
@@ -164,9 +170,8 @@
   align-items: center;
   border-radius: 10px;
 }
-.filtres .filtre-area .filtre-element-tag svg {
-  height: fit-content;
-  width: 0.625rem;
+.filter-tags .filtre-element-tag svg {
+  width: 0.875rem;
 }
 
 .main-searchbar {

@@ -4,125 +4,129 @@
   display: flex;
   gap: 63px;
 
-  .filtre-area {
+  .filtre-container {
+    background-color: white;
+    border-radius: 11px;
+    max-width: 195px;
+    max-height: 56px;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    .filtre-container {
-      background-color: white;
-      border-radius: 11px;
-      max-width: 195px;
-      max-height: 56px;
-      height: 100%;
-      width: 100%;
+
+    transition: max-height 0.3s ease;
+
+    &.open {
+      max-height: 315px;
+    }
+
+    .filtre-title {
+      height: 56px;
+      padding: 17px 16px;
       font-size: 1rem;
-      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      transition: max-height 0.3s ease;
-
-      &.open {
-        max-height: 315px;
+      .arrow {
+        height: fit-content;
+        width: 1rem;
+        transition: transform 0.3s ease;
       }
+      .rotate {
+        transform: rotate(180deg);
+      }
+    }
 
-      .filtre-title {
+    .filtre-elements-section {
+      overflow-y: scroll;
+      scrollbar-width: none;
+      height: 259px;
+      .filtre-searching {
+        padding: 0 10%;
         height: 56px;
-        padding: 17px 16px;
-        font-size: 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
 
-        .arrow {
-          height: fit-content;
-          width: 1rem;
-          transition: transform 0.3s ease;
-        }
-        .rotate {
-          transform: rotate(180deg);
+        .filtre-searchbar {
+          display: flex;
+          border-radius: 2px;
+          border: solid 1px variables.$light-grey;
+          padding: 5%;
+          height: 2.25rem;
+
+          input {
+            width: 100%;
+            caret-color: variables.$light-grey;
+          }
+
+          svg {
+            height: fit-content;
+            width: 0.875rem;
+          }
         }
       }
 
-      .filtre-elements-section {
-        overflow-y: scroll;
-        scrollbar-width: none;
-        height: 259px;
-        .filtre-searching {
-          padding: 0 10%;
-          height: 56px;
+      .selected-elements {
+        margin-bottom: 20px;
+        div {
+          background-color: variables.$yellow;
+          padding: 5%;
+          font-size: 0.875rem;
+          display: flex;
+          justify-content: space-between;
 
-          .filtre-searchbar {
-            display: flex;
-            border-radius: 2px;
-            border: solid 1px variables.$light-grey;
-            padding: 5%;
-            height: 2.25rem;
+          .unselect-filter-element {
+            display: none;
+          }
 
-            input {
-              width: 100%;
-              caret-color: variables.$light-grey;
-            }
+          &:hover {
+            font-weight: 700;
 
-            svg {
-              height: fit-content;
-              width: 0.875rem;
+            .unselect-filter-element {
+              display: block;
+              width: 17px;
             }
           }
         }
+      }
 
-        .selected-elements {
-          margin-bottom: 20px;
-          div {
+      .filtre-elements {
+        div {
+          padding: 5%;
+          font-size: 0.875rem;
+
+          .unselect-filter-element {
+            display: none;
+          }
+
+          &:hover {
             background-color: variables.$yellow;
-            padding: 5%;
-            font-size: 0.875rem;
-            display: flex;
-            justify-content: space-between;
-
-            .unselect-filter-element {
-              display: none;
-            }
-
-            &:hover {
-              font-weight: 700;
-
-              .unselect-filter-element {
-                display: block;
-                width: 17px;
-              }
-            }
-          }
-        }
-
-        .filtre-elements {
-          div {
-            padding: 5%;
-            font-size: 0.875rem;
-
-            .unselect-filter-element {
-              display: none;
-            }
-
-            &:hover {
-              background-color: variables.$yellow;
-            }
           }
         }
       }
     }
+  }
+}
 
-    .filtre-element-tag {
-      background-color: variables.$yellow;
-      padding: 17px 18px;
-      font-size: 0.875rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 10px;
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 20px;
+  width: 100%;
+  .filtre-element-tag {
+    width: 195px;
+    background-color: variables.$yellow;
+    padding: 17px 18px;
+    font-size: 0.875rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
 
-      svg {
-        height: fit-content;
-        width: 0.625rem;
-      }
+    svg {
+      width: 0.875rem;
     }
   }
 }
