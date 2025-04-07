@@ -1,55 +1,36 @@
-const filters = document.querySelectorAll(".filtre-container");
-const filterButtons = document.querySelectorAll(".filtre-title");
-const arrows = document.querySelectorAll(".arrow");
+import { capitalizeFirstLetter } from "/src/js/utils/formatData.js";
+import { recipes } from "/src/data/recipes.js";
 
-// Gestion de la flèche des filtres
+// Récuperer les containers qui accueillent les options de chaque filtre
+const filterIngredients = document.querySelector(
+  ".filtre-elements.filtre-ingredients"
+);
+const filterAppliances = document.querySelector(
+  ".filtre-elements.filtre-appliances"
+);
+const filterUstensils = document.querySelector(
+  ".filtre-elements.filtre-ustensils"
+);
 
-filterButtons.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    arrowRotate(arrows[index]);
-    displayFilter(filters[index]);
-  });
-});
+// Récupérer les listes des filtres
+const { allIngredients, allAppliances, allUstensils } =
+  getFiltersElements(recipes);
 
-function arrowRotate(arrow) {
-  arrow.classList.toggle("rotate");
-}
+// Remplir les filtres avec les listes correspondantes
+fillFilters(allIngredients, filterIngredients);
+fillFilters(allAppliances, filterAppliances);
+fillFilters(allUstensils, filterUstensils);
 
-function displayFilter(filter) {
-  filter.classList.toggle("open");
-}
-
-// Fonction permettant de rechercher un tag dans un filtre
-
-function searchingTag(input, listItems) {
-  const searchbarTag = input;
-
-  // Écoute les changements dans l'input
-  searchbarTag.addEventListener("input", () => {
-    const filterValue = searchbarTag.value.toLowerCase(); // Récupère la valeur de l'input en minuscule
-
-    // Parcourt chaque élément de la liste
-    listItems.forEach((item) => {
-      const text = item.textContent.toLowerCase(); // Récupère le texte de l'élément en minuscule
-
-      // Affiche ou masque l'élément en fonction de la correspondance avec la valeur de l'input
-      item.style.display = text.includes(filterValue) ? "block" : "none";
-    });
+function fillFilters(filterElements, filterElementsContainer) {
+  filterElements.forEach((el) => {
+    const filterItem = document.createElement("div");
+    filterItem.textContent = el;
+    filterElementsContainer.appendChild(filterItem);
   });
 }
 
-export function getFilterElements(recipes) {
-  const filterIngredientsSection = document.querySelector(
-    ".filtre-ingredients"
-  );
-  const filterAppliancesSection = document.querySelector(".filtre-appliances");
-  const filterUstensilsSection = document.querySelector(".filtre-ustensils");
-
-  // Fonction pour capitaliser seulement la première lettre
-  const capitalizeFirstLetter = (str) =>
-    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-
-  // Récupérer tous les ingrédients uniques avec la bonne mise en forme
+function getFiltersElements(recipes) {
+  // Set uniques pour éviter les doublons
   const allIngredients = [
     ...new Set(
       recipes.flatMap((recipe) =>
@@ -58,19 +39,16 @@ export function getFilterElements(recipes) {
     ),
   ];
 
-  searchingTag(
-    document.getElementById("searchbar-ingredients"),
-    allIngredients
-  );
+  console.log(allIngredients);
 
-  // Récupérer toutes les appliances uniques avec la bonne mise en forme
   const allAppliances = [
     ...new Set(
       recipes.map((recipe) => capitalizeFirstLetter(recipe.appliance))
     ),
   ];
 
-  // Récupérer tous les ustensiles uniques avec la bonne mise en forme
+  console.log(allAppliances);
+
   const allUstensils = [
     ...new Set(
       recipes.flatMap((recipe) =>
@@ -79,10 +57,7 @@ export function getFilterElements(recipes) {
     ),
   ];
 
-  console.log(allIngredients);
-  console.log(allAppliances);
   console.log(allUstensils);
 
-  // Retourner les variables
   return { allIngredients, allAppliances, allUstensils };
 }

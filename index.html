@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/src/js/script.js" defer></script>
-    <script type="module" src="/src/js/components/Filters.js" defer></script>
     <link rel="icon" type="image/png" href="/src/assets/icons/favicon.png" />
     <link rel="stylesheet" href="/dist/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,6 +30,7 @@
 
       <div class="main-searchbar">
         <input
+          id="global-search"
           type="search"
           placeholder="Rechercher une recette, un ingrédient..."
         />
@@ -196,10 +195,14 @@
               </div>
             </div>
           </div>
-          <p class="nombre-recettes">1500 recettes</p>
+          <p class="nombre-recettes"></p>
         </section>
         <section class="section-recettes"></section>
       </div>
     </main>
+    <script type="module" src="/src/js/script.js"></script>
+    <script type="module" src="/src/js/components/Dropdown.js"></script>
+    <script type="module" src="/src/js/components/Filters.js"></script>
+    <script type="module" src="/src/js/components/GlobalSearch.js"></script>
   </body>
 </html>

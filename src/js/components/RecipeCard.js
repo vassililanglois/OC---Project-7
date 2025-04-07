@@ -1,3 +1,5 @@
+export const sectionRecettes = document.querySelector(".section-recettes");
+
 export function createRecipeCard(recipe) {
   const recette = document.createElement("article");
   recette.classList.add("recette");
