@@ -22,13 +22,34 @@ const { allIngredients, allAppliances, allUstensils } =
   getFiltersElements(recipes);
 
 // Fonction pour rechercher dans les filtres
-function filterSearch(input, list, container) {
+function filterSearch(input, originalList, container) {
   input.addEventListener("input", () => {
     const keyword = input.value.trim().toLowerCase(); // Récupérer la valeur de l'input
-    const filteredList = list.filter((item) =>
+
+    // Conserver les éléments sélectionnés
+    const selectedItems = Array.from(
+      container.querySelectorAll(".filter-item.selected")
+    ).map((item) => item.textContent.trim());
+
+    // Filtrer la liste originale en fonction du mot-clé
+    const filteredList = originalList.filter((item) =>
       item.toLowerCase().includes(keyword)
-    ); // Filtrer la liste en fonction du mot-clé
-    fillFilters(filteredList, container); // Mettre à jour les éléments affichés
+    );
+
+    // Ajouter les éléments sélectionnés en haut de la liste filtrée
+    const finalList = [...new Set([...selectedItems, ...filteredList])];
+
+    fillFilters(finalList, container); // Mettre à jour les éléments affichés
+
+    // Restaurer l'état sélectionné des éléments
+    selectedItems.forEach((selected) => {
+      const matchingItem = Array.from(
+        container.querySelectorAll(".filter-item")
+      ).find((item) => item.textContent.trim() === selected);
+      if (matchingItem) {
+        matchingItem.classList.add("selected");
+      }
+    });
   });
 }
 

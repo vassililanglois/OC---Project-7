@@ -63,11 +63,36 @@
         }
       }
     }
+
     .filtre-elements-section {
       overflow-y: scroll;
       scrollbar-width: none;
       height: 100%;
       max-height: 259px;
+
+      .selected-elements {
+        .selected {
+          background-color: variables.$yellow;
+          padding: 5%;
+          font-size: 0.875rem;
+          display: flex;
+          justify-content: space-between;
+
+          .unselect-filter-element {
+            width: 0.875rem;
+            display: none;
+          }
+
+          &:hover {
+            font-weight: 700;
+
+            .unselect-filter-element {
+              display: block;
+              width: 0.875rem;
+            }
+          }
+        }
+      }
 
       .filtre-elements {
         div {
