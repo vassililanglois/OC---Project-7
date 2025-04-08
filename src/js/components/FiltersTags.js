@@ -23,6 +23,14 @@ export function createTag(el) {
         tagContainer.removeChild(tag); // Supprimer le tag du container
       }
     });
+
+    // Retirer la classe "selected" de l'élément correspondant dans les filtres
+    const filterItems = document.querySelectorAll(".filter-item");
+    filterItems.forEach((item) => {
+      if (item.textContent.trim() === el) {
+        item.classList.remove("selected");
+      }
+    });
   });
 
   // Supprimer la classe d'animation d'entrée après l'animation

@@ -28,11 +28,20 @@ export function fillFilters(filterElements, filterElementsContainer) {
 
   filterElements.forEach((el) => {
     const filterItem = document.createElement("div");
-    filterItem.textContent = el;
+    filterItem.innerHTML = `
+    <p>${el}</p>
+    <svg class="unselect-filter-element" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+    `;
     filterItem.classList.add("filter-item"); // Ajouter une classe pour styliser si nécessaire
 
-    // Ajouter un gestionnaire de clic pour créer un tag
+    // Ajouter un gestionnaire de clic pour l'élément principal
     filterItem.addEventListener("click", () => {
+      if (!filterItem.classList.contains("selected")) {
+        filterItem.classList.add("selected"); // Ajouter la classe "selected"
+      } else {
+        filterItem.classList.remove("selected"); // Retirer la classe "selected" si déjà présente
+      }
+
       const tagContainer = document.querySelector(".filter-tags");
 
       // Vérifier si le tag existe déjà
@@ -43,11 +52,42 @@ export function fillFilters(filterElements, filterElementsContainer) {
       if (!tagExists) {
         createTag(el); // Appeler la fonction createTag avec l'élément
       }
+
+      // Appeler getSelectedFilters pour mettre à jour les logs dynamiquement
+      console.log(getSelectedFilters());
+    });
+
+    // Ajouter un gestionnaire de clic pour le SVG
+    const unselectSvg = filterItem.querySelector(".unselect-filter-element");
+    unselectSvg.addEventListener("click", (event) => {
+      event.stopPropagation(); // Empêcher le clic de se propager au parent
+      filterItem.classList.remove("selected"); // Retirer la classe "selected"
+
+      // Supprimer le tag lié à l'élément
+      const tagContainer = document.querySelector(".filter-tags");
+      const tagToRemove = Array.from(tagContainer.children).find(
+        (tag) => tag.textContent.trim() === el
+      );
+      if (tagToRemove) {
+        tagContainer.removeChild(tagToRemove); // Supprimer le tag du container
+      }
     });
 
     filterElementsContainer.appendChild(filterItem); // Ajouter l'élément au container
   });
 }
+
+// Fonction pour actualiser les filtres en fonction des recettes filtrées
+export function updateFilters(filteredRecipes) {
+  const { allIngredients, allAppliances, allUstensils } =
+    getFiltersElements(filteredRecipes);
+
+  // Mettre à jour les filtres affichés
+  fillFilters(allIngredients, filterIngredients);
+  fillFilters(allAppliances, filterAppliances);
+  fillFilters(allUstensils, filterUstensils);
+}
+
 // Fonction pour récupérer les éléments des filtres
 export function getFiltersElements(recipes) {
   // Set uniques pour éviter les doublons
@@ -76,17 +116,23 @@ export function getFiltersElements(recipes) {
   return { allIngredients, allAppliances, allUstensils };
 }
 
-// Fonction pour actualiser les filtres en fonction des recettes filtrées
-export function updateFilters(filteredRecipes) {
-  const { allIngredients, allAppliances, allUstensils } =
-    getFiltersElements(filteredRecipes);
+export function getSelectedFilters() {
+  const selectedIngredients = Array.from(
+    filterIngredients.querySelectorAll(".filter-item.selected")
+  ).map((item) => item.textContent.trim());
+  console.log(selectedIngredients);
 
-  // Mettre à jour les filtres affichés
-  fillFilters(allIngredients, filterIngredients);
-  fillFilters(allAppliances, filterAppliances);
-  fillFilters(allUstensils, filterUstensils);
+  const selectedAppliances = Array.from(
+    filterAppliances.querySelectorAll(".filter-item.selected")
+  ).map((item) => item.textContent.trim());
+  console.log(selectedAppliances);
+
+  const selectedUstensils = Array.from(
+    filterUstensils.querySelectorAll(".filter-item.selected")
+  ).map((item) => item.textContent.trim());
+  console.log(selectedUstensils);
+
+  return { selectedIngredients, selectedAppliances, selectedUstensils };
 }
 
-const filterItems = document.querySelectorAll(".filter-elements div");
-
-filterItems.forEach((item) => {});
+getSelectedFilters();
