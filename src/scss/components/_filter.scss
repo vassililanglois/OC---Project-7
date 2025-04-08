@@ -43,6 +43,7 @@
     .filtre-searching {
       padding: 0 10%;
       height: 56px;
+      margin-bottom: 20px;
 
       .filtre-searchbar {
         display: flex;
@@ -78,6 +79,7 @@
           justify-content: space-between;
 
           .unselect-filter-element {
+            width: 0.875rem;
             display: none;
           }
 
@@ -86,7 +88,7 @@
 
             .unselect-filter-element {
               display: block;
-              width: 17px;
+              width: 0.875rem;
             }
           }
         }
@@ -98,6 +100,7 @@
           font-size: 0.875rem;
 
           .unselect-filter-element {
+            width: 0.875rem;
             display: none;
           }
 
@@ -131,6 +134,8 @@
     }
   }
 }
+
+// Partie animation des tags
 
 .tag-enter {
   animation: tagScaleIn 0.1s ease-in-out; /* Durée et type d'animation */

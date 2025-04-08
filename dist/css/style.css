@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /***** Components *****/
 /***** Variables de couleur *****/
 .recette {
@@ -98,29 +99,31 @@
 .filtres .filtre-container .filtre-title .rotate {
   transform: rotate(180deg);
 }
-.filtres .filtre-container .filtre-elements-section {
-  overflow-y: scroll;
-  scrollbar-width: none;
-  height: 259px;
-}
-.filtres .filtre-container .filtre-elements-section .filtre-searching {
+.filtres .filtre-container .filtre-searching {
   padding: 0 10%;
   height: 56px;
+  margin-bottom: 20px;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar {
+.filtres .filtre-container .filtre-searching .filtre-searchbar {
   display: flex;
   border-radius: 2px;
   border: solid 1px #e5e5e5;
   padding: 5%;
   height: 2.25rem;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar input {
+.filtres .filtre-container .filtre-searching .filtre-searchbar input {
   width: 100%;
   caret-color: #e5e5e5;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-searching .filtre-searchbar svg {
+.filtres .filtre-container .filtre-searching .filtre-searchbar svg {
   height: fit-content;
   width: 0.875rem;
+}
+.filtres .filtre-container .filtre-elements-section {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  height: 100%;
+  max-height: 259px;
 }
 .filtres .filtre-container .filtre-elements-section .selected-elements {
   margin-bottom: 20px;
@@ -133,6 +136,7 @@
   justify-content: space-between;
 }
 .filtres .filtre-container .filtre-elements-section .selected-elements div .unselect-filter-element {
+  width: 0.875rem;
   display: none;
 }
 .filtres .filtre-container .filtre-elements-section .selected-elements div:hover {
@@ -140,13 +144,14 @@
 }
 .filtres .filtre-container .filtre-elements-section .selected-elements div:hover .unselect-filter-element {
   display: block;
-  width: 17px;
+  width: 0.875rem;
 }
 .filtres .filtre-container .filtre-elements-section .filtre-elements div {
   padding: 5%;
   font-size: 0.875rem;
 }
 .filtres .filtre-container .filtre-elements-section .filtre-elements div .unselect-filter-element {
+  width: 0.875rem;
   display: none;
 }
 .filtres .filtre-container .filtre-elements-section .filtre-elements div:hover {
@@ -174,6 +179,36 @@
   width: 0.875rem;
 }
 
+.tag-enter {
+  animation: tagScaleIn 0.1s ease-in-out; /* Durée et type d'animation */
+}
+
+.tag-exit {
+  animation: tagScaleOut 0.1s ease-in-out; /* Animation de sortie */
+}
+
+/* Animation d'entrée pour les tags avec effet de grossissement */
+@keyframes tagScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8); /* Réduction initiale */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); /* Taille normale */
+  }
+}
+/* Animation de sortie pour les tags */
+@keyframes tagScaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1); /* Taille normale */
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8); /* Réduction finale */
+  }
+}
 .main-searchbar {
   max-width: 954px;
   width: 100%;
