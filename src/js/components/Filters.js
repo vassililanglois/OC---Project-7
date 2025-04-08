@@ -63,13 +63,20 @@ export function fillFilters(filterElements, filterElementsContainer) {
       event.stopPropagation(); // Empêcher le clic de se propager au parent
       filterItem.classList.remove("selected"); // Retirer la classe "selected"
 
-      // Supprimer le tag lié à l'élément
+      // Supprimer le tag lié à l'élément avec animation
       const tagContainer = document.querySelector(".filter-tags");
       const tagToRemove = Array.from(tagContainer.children).find(
         (tag) => tag.textContent.trim() === el
       );
       if (tagToRemove) {
-        tagContainer.removeChild(tagToRemove); // Supprimer le tag du container
+        tagToRemove.classList.add("tag-exit"); // Ajouter la classe pour l'animation de sortie
+
+        // Supprimer le tag après la fin de l'animation
+        tagToRemove.addEventListener("animationend", () => {
+          if (tagToRemove.classList.contains("tag-exit")) {
+            tagContainer.removeChild(tagToRemove); // Supprimer le tag du container
+          }
+        });
       }
     });
 
