@@ -10,12 +10,24 @@ export function createTag(el) {
     </svg>
   `;
 
-  tag.classList.add("filtre-element-tag"); // Ajouter une classe pour styliser le tag
+  tag.classList.add("filtre-element-tag", "tag-enter"); // Ajouter une classe pour styliser et animer le tag
 
   // Ajouter un gestionnaire d'événements pour le SVG
   const svg = tag.querySelector("svg");
   svg.addEventListener("click", () => {
-    tagContainer.removeChild(tag); // Supprimer le tag du container
+    tag.classList.add("tag-exit"); // Ajouter une classe pour l'animation de sortie
+
+    // Supprimer le tag après la fin de l'animation
+    tag.addEventListener("animationend", () => {
+      if (tag.classList.contains("tag-exit")) {
+        tagContainer.removeChild(tag); // Supprimer le tag du container
+      }
+    });
+  });
+
+  // Supprimer la classe d'animation d'entrée après l'animation
+  tag.addEventListener("animationend", () => {
+    tag.classList.remove("tag-enter");
   });
 
   tagContainer.appendChild(tag); // Ajouter le tag au container

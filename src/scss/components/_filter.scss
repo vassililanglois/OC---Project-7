@@ -40,32 +40,33 @@
       }
     }
 
+    .filtre-searching {
+      padding: 0 10%;
+      height: 56px;
+
+      .filtre-searchbar {
+        display: flex;
+        border-radius: 2px;
+        border: solid 1px variables.$light-grey;
+        padding: 5%;
+        height: 2.25rem;
+
+        input {
+          width: 100%;
+          caret-color: variables.$light-grey;
+        }
+
+        svg {
+          height: fit-content;
+          width: 0.875rem;
+        }
+      }
+    }
     .filtre-elements-section {
       overflow-y: scroll;
       scrollbar-width: none;
-      height: 259px;
-      .filtre-searching {
-        padding: 0 10%;
-        height: 56px;
-
-        .filtre-searchbar {
-          display: flex;
-          border-radius: 2px;
-          border: solid 1px variables.$light-grey;
-          padding: 5%;
-          height: 2.25rem;
-
-          input {
-            width: 100%;
-            caret-color: variables.$light-grey;
-          }
-
-          svg {
-            height: fit-content;
-            width: 0.875rem;
-          }
-        }
-      }
+      height: 100%;
+      max-height: 259px;
 
       .selected-elements {
         margin-bottom: 20px;
@@ -128,5 +129,37 @@
     svg {
       width: 0.875rem;
     }
+  }
+}
+
+.tag-enter {
+  animation: tagScaleIn 0.1s ease-in-out; /* Durée et type d'animation */
+}
+
+.tag-exit {
+  animation: tagScaleOut 0.1s ease-in-out; /* Animation de sortie */
+}
+
+/* Animation d'entrée pour les tags avec effet de grossissement */
+@keyframes tagScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8); /* Réduction initiale */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); /* Taille normale */
+  }
+}
+
+/* Animation de sortie pour les tags */
+@keyframes tagScaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1); /* Taille normale */
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8); /* Réduction finale */
   }
 }
