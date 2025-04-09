@@ -45,3 +45,7 @@ export function createRecipeCard(recipe) {
 
   return recette;
 }
+
+export function clearRecipes() {
+  sectionRecettes.textContent = "";
+}

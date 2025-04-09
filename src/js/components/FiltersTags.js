@@ -1,3 +1,7 @@
+import { searchByFilters } from "./Filters.js";
+import { displayRecipeCards } from "../script.js";
+import { setNumberOfRecipes } from "../script.js";
+
 export function createTag(el) {
   const tagContainer = document.querySelector(".filter-tags");
   const tag = document.createElement("div");
@@ -31,6 +35,11 @@ export function createTag(el) {
         item.classList.remove("selected");
       }
     });
+
+    // Re-render les recettes après suppression du tag
+    const filteredRecipes = searchByFilters();
+    displayRecipeCards(filteredRecipes);
+    setNumberOfRecipes(filteredRecipes);
   });
 
   // Supprimer la classe d'animation d'entrée après l'animation

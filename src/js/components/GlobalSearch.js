@@ -1,4 +1,11 @@
 import { recipes } from "../../data/recipes.js";
+import { displayRecipeCards, setNumberOfRecipes } from "../script.js";
+import {
+  displayErrorMessage,
+  eraseErrorMessage,
+} from "../utils/noRecipeFound.js";
+import { updateFilters } from "./Filters.js";
+import { clearRecipes } from "./RecipeCard.js";
 
 export const globalSearchInput = document.querySelector("#global-search");
 
@@ -7,25 +14,54 @@ export function isKeywordValid(keyword) {
   return keyword.length >= 3;
 }
 
-// Recherche dans le titre, la description et les ingrédients
 export function globalSearch(keyword) {
-  const filteredRecipes = [];
+  // Si aucun mot-clé, retourner toutes les recettes
+  if (!keyword || keyword.trim().length === 0) {
+    return recipes;
+  }
 
-  recipes.forEach((recipe) => {
+  // Recherche dans le titre, la description et les ingrédients
+  return recipes.filter((recipe) => {
     const title = recipe.name.toLowerCase();
     const description = recipe.description.toLowerCase();
     const ingredients = recipe.ingredients
       .map((ing) => ing.ingredient.toLowerCase())
       .join(" ");
 
-    if (
-      title.includes(keyword) ||
-      description.includes(keyword) ||
-      ingredients.includes(keyword)
-    ) {
-      filteredRecipes.push(recipe);
-    }
+    return (
+      title.includes(keyword.toLowerCase()) ||
+      description.includes(keyword.toLowerCase()) ||
+      ingredients.includes(keyword.toLowerCase())
+    );
   });
-
-  return filteredRecipes;
 }
+
+// Gérer la recherche globale
+function handleGlobalSearch() {
+  const keyword = globalSearchInput.value.trim().toLowerCase();
+
+  if (keyword.length === 0) {
+    displayRecipeCards(recipes);
+    setNumberOfRecipes(recipes);
+    eraseErrorMessage();
+    updateFilters(recipes);
+  } else if (isKeywordValid(keyword)) {
+    const filteredRecipes = globalSearch(keyword);
+    displayRecipeCards(filteredRecipes);
+    setNumberOfRecipes(filteredRecipes);
+    updateFilters(filteredRecipes);
+
+    if (filteredRecipes.length === 0) {
+      displayErrorMessage(keyword);
+    } else {
+      eraseErrorMessage();
+    }
+  } else {
+    setNumberOfRecipes([]);
+    updateFilters([]);
+    eraseErrorMessage();
+  }
+}
+
+// Ajouter un écouteur d'événement pour la barre de recherche
+globalSearchInput.addEventListener("input", handleGlobalSearch);

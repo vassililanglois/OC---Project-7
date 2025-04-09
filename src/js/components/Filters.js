@@ -29,12 +29,14 @@ export function fillFilters(
   filterElementsContainer,
   filterName
 ) {
-  console.log("Éléments à afficher :", filterElements); // Vérifiez le contenu de la liste
-  filterElementsContainer.innerHTML = ""; // Réinitialiser le container
+  // Réinitialiser le container
+  filterElementsContainer.innerHTML = "";
 
+  // Trouver le conteneur pour chaque filtre dans le DOM grâce à "filterName"
   const selectedElementsContainer = document.querySelector(
     `.selected-elements.filtre-${filterName}`
   );
+
   filterElements.forEach((el) => {
     const filterItem = document.createElement("div");
     filterItem.innerHTML = `
@@ -45,10 +47,12 @@ export function fillFilters(
 
     // Ajouter un gestionnaire de clic pour l'élément principal
     filterItem.addEventListener("click", () => {
+      // Ajouter ou retire la classe "selected" à un élément d'un filtre
       if (!filterItem.classList.contains("selected")) {
-        filterItem.classList.add("selected"); // Ajouter la classe "selected"
+        filterItem.classList.add("selected");
+        searchByFilters();
       } else {
-        filterItem.classList.remove("selected"); // Retirer la classe "selected" si déjà présente
+        filterItem.classList.remove("selected");
       }
 
       const tagContainer = document.querySelector(".filter-tags");
@@ -66,8 +70,6 @@ export function fillFilters(
       const filteredRecipes = searchByFilters();
       displayRecipeCards(filteredRecipes); // Afficher les recettes filtrées
       setNumberOfRecipes(filteredRecipes); // Mettre à jour le nombre de recettes affichées
-
-      console.log(getSelectedFilters());
     });
 
     // Ajouter un gestionnaire de clic pour le SVG
@@ -106,6 +108,70 @@ export function updateFilters(filteredRecipes) {
   fillFilters(allUstensils, filterUstensils, "ustensils");
 }
 
+export function getSelectedFilters() {
+  const selectedIngredients = Array.from(
+    filterIngredients.querySelectorAll(".filter-item.selected")
+  ).map((item) => item.textContent.trim());
+
+  const selectedAppliances = Array.from(
+    filterAppliances.querySelectorAll(".filter-item.selected")
+  ).map((item) => item.textContent.trim());
+
+  const selectedUstensils = Array.from(
+    filterUstensils.querySelectorAll(".filter-item.selected")
+  ).map((item) => item.textContent.trim());
+
+  return { selectedIngredients, selectedAppliances, selectedUstensils };
+}
+
+export function searchByFilters() {
+  const { selectedIngredients, selectedAppliances, selectedUstensils } =
+    getSelectedFilters();
+
+  const filteredRecipesByFilters = [];
+
+  for (const recipe of recipes) {
+    const recipeIngredients = recipe.ingredients.map((ing) =>
+      ing.ingredient.toLowerCase()
+    );
+
+    const recipeAppliance = recipe.appliance.toLowerCase();
+    const recipeUstensils = recipe.ustensils.map((u) => u.toLowerCase());
+
+    const hasAllIngredients = selectedIngredients.every((selectedIng) =>
+      recipeIngredients.includes(selectedIng.toLowerCase())
+    );
+
+    const hasAppliance =
+      selectedAppliances.length === 0 ||
+      selectedAppliances.includes(recipeAppliance);
+
+    const hasAllUstensils = selectedUstensils.every((selectedUst) =>
+      recipeUstensils.includes(selectedUst.toLowerCase())
+    );
+
+    if (hasAllIngredients && hasAppliance && hasAllUstensils) {
+      // On vérifie s'il n'est pas déjà ajouté (par ID)
+      if (!filteredRecipesByFilters.some((r) => r.id === recipe.id)) {
+        filteredRecipesByFilters.push(recipe);
+      }
+    }
+  }
+
+  return filteredRecipesByFilters;
+}
+
+export function hasFilters() {
+  const { selectedIngredients, selectedAppliances, selectedUstensils } =
+    getSelectedFilters();
+
+  return (
+    selectedIngredients.length > 0 ||
+    selectedAppliances.length > 0 ||
+    selectedUstensils.length > 0
+  );
+}
+
 // Fonction pour récupérer les éléments des filtres
 export function getFiltersElements(recipes) {
   // Set uniques pour éviter les doublons
@@ -132,73 +198,4 @@ export function getFiltersElements(recipes) {
   ];
 
   return { allIngredients, allAppliances, allUstensils };
-}
-
-export function getSelectedFilters() {
-  const selectedIngredients = Array.from(
-    filterIngredients.querySelectorAll(".filter-item.selected")
-  ).map((item) => item.textContent.trim());
-  console.log(selectedIngredients);
-
-  const selectedAppliances = Array.from(
-    filterAppliances.querySelectorAll(".filter-item.selected")
-  ).map((item) => item.textContent.trim());
-  console.log(selectedAppliances);
-
-  const selectedUstensils = Array.from(
-    filterUstensils.querySelectorAll(".filter-item.selected")
-  ).map((item) => item.textContent.trim());
-  console.log(selectedUstensils);
-
-  return { selectedIngredients, selectedAppliances, selectedUstensils };
-}
-
-getSelectedFilters();
-
-export function searchByFilters() {
-  const { selectedIngredients, selectedAppliances, selectedUstensils } =
-    getSelectedFilters();
-
-  const filteredRecipes = [];
-
-  for (const recipe of recipes) {
-    const recipeIngredients = recipe.ingredients.map((ing) =>
-      ing.ingredient.toLowerCase()
-    );
-
-    const recipeAppliance = recipe.appliance.toLowerCase();
-    const recipeUstensils = recipe.ustensils.map((u) => u.toLowerCase());
-
-    const hasAllIngredients = selectedIngredients.every((selectedIng) =>
-      recipeIngredients.includes(selectedIng.toLowerCase())
-    );
-
-    const hasAppliance =
-      selectedAppliances.length === 0 ||
-      selectedAppliances.includes(recipeAppliance);
-
-    const hasAllUstensils = selectedUstensils.every((selectedUst) =>
-      recipeUstensils.includes(selectedUst.toLowerCase())
-    );
-
-    if (hasAllIngredients && hasAppliance && hasAllUstensils) {
-      // On vérifie s'il n'est pas déjà ajouté (par ID)
-      if (!filteredRecipes.some((r) => r.id === recipe.id)) {
-        filteredRecipes.push(recipe);
-      }
-    }
-  }
-
-  return filteredRecipes;
-}
-
-export function hasFilters() {
-  const { selectedIngredients, selectedAppliances, selectedUstensils } =
-    getSelectedFilters();
-
-  return (
-    selectedIngredients.length > 0 ||
-    selectedAppliances.length > 0 ||
-    selectedUstensils.length > 0
-  );
 }
