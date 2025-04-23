@@ -1,8 +1,3 @@
-// Permet de générer un message d'erruer lorsque la recherche de l'utilisateur
-// n'aboutie pas
-
-import { sectionRecettes } from "/src/js/components/RecipeCard.js";
-
 const errorMessage = document.querySelector(".error-message");
 
 export function displayErrorMessage(keyword) {

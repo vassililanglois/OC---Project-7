@@ -1,8 +1,7 @@
-import { capitalizeFirstLetter } from "/src/js/utils/formatData.js";
-import { recipes } from "/src/data/recipes.js";
-import { createTag } from "./FiltersTags.js";
-import { displayRecipeCards } from "../script.js"; // Importer la fonction pour afficher les recettes
-import { setNumberOfRecipes } from "../script.js"; // Importer la fonction pour mettre à jour le nombre de recettes
+import { recipes } from "../../data/recipes.js";
+import { displayRecipeCards, setNumberOfRecipes } from "../pages/index.js";
+import { capitalizeFirstLetter } from "../utils/formatData.js";
+import { addTag } from "./FiltersTags.js";
 
 // Récuperer les containers qui accueillent les options de chaque filtre
 const filterIngredients = document.querySelector(
@@ -63,7 +62,7 @@ export function fillFilters(
       );
 
       if (!tagExists) {
-        createTag(el); // Appeler la fonction createTag avec l'élément
+        addTag(el); // Appeler la fonction addTag avec l'élément
       }
 
       // Actualiser la liste des recettes filtrées
@@ -136,6 +135,7 @@ export function searchByFilters() {
     );
 
     const recipeAppliance = recipe.appliance.toLowerCase();
+    console.log();
     const recipeUstensils = recipe.ustensils.map((u) => u.toLowerCase());
 
     const hasAllIngredients = selectedIngredients.every((selectedIng) =>
