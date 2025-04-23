@@ -17,12 +17,6 @@ class Index {
   displayRecipes(recipeList) {
     clearRecipes();
 
-    // Vérifier si des recettes sont disponibles
-    if (recipeList.length === 0) {
-      this.recipesSection.innerHTML = `<p>Aucune recette trouvée.</p>`;
-      return;
-    }
-
     // Parcourir les recettes et les afficher
     recipeList.forEach((recipe) => {
       const recipeModel = recipeFactory(recipe);
@@ -45,7 +39,7 @@ export function setNumberOfRecipes(list) {
 }
 
 // Exporter la fonction d'affichage pour l'utiliser ailleurs
-export function displayRecipeCards(recipeList) {
+export function displayRecipes(recipeList) {
   index.displayRecipes(recipeList);
 }
 
