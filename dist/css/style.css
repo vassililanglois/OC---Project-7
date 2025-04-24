@@ -71,7 +71,14 @@
   display: flex;
   gap: 63px;
 }
-.filtres .filtre-container {
+.filtres .filter-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Permet à la hauteur de s'adapter au contenu */
+  min-height: 0;
+}
+.filtres .filter-area .filtre-container {
   background-color: white;
   border-radius: 11px;
   max-width: 195px;
@@ -84,10 +91,11 @@
   flex-direction: column;
   transition: max-height 0.3s ease;
 }
-.filtres .filtre-container.open {
+.filtres .filter-area .filtre-container.open {
   max-height: 315px;
 }
-.filtres .filtre-container .filtre-title {
+.filtres .filter-area .filtre-container .filtre-title {
+  cursor: pointer;
   height: 56px;
   padding: 17px 16px;
   font-size: 1rem;
@@ -95,90 +103,93 @@
   justify-content: space-between;
   align-items: center;
 }
-.filtres .filtre-container .filtre-title .arrow {
+.filtres .filter-area .filtre-container .filtre-title .arrow {
   height: fit-content;
   width: 1rem;
   transition: transform 0.3s ease;
 }
-.filtres .filtre-container .filtre-title .rotate {
+.filtres .filter-area .filtre-container .filtre-title .rotate {
   transform: rotate(180deg);
 }
-.filtres .filtre-container .filtre-searching {
+.filtres .filter-area .filtre-container .filtre-searching {
   padding: 0 10%;
   height: 56px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
-.filtres .filtre-container .filtre-searching .filtre-searchbar {
+.filtres .filter-area .filtre-container .filtre-searching .filtre-searchbar {
+  cursor: pointer;
   display: flex;
   border-radius: 2px;
   border: solid 1px #e5e5e5;
   padding: 5%;
   height: 2.25rem;
 }
-.filtres .filtre-container .filtre-searching .filtre-searchbar input {
+.filtres .filter-area .filtre-container .filtre-searching .filtre-searchbar input {
   width: 100%;
   caret-color: #e5e5e5;
 }
-.filtres .filtre-container .filtre-searching .filtre-searchbar svg {
+.filtres .filter-area .filtre-container .filtre-searching .filtre-searchbar svg {
   height: fit-content;
   width: 0.875rem;
 }
-.filtres .filtre-container .filtre-elements-section {
+.filtres .filter-area .filtre-container .filtre-elements-section {
   overflow-y: scroll;
   scrollbar-width: none;
-  height: 100%;
   max-height: 259px;
 }
-.filtres .filtre-container .filtre-elements-section .selected-elements .selected {
+.filtres .filter-area .filtre-container .filtre-elements-section .selected-elements .selected {
   background-color: #ffd15b;
   padding: 5%;
   font-size: 0.875rem;
   display: flex;
   justify-content: space-between;
 }
-.filtres .filtre-container .filtre-elements-section .selected-elements .selected .unselect-filter-element {
+.filtres .filter-area .filtre-container .filtre-elements-section .selected-elements .selected .unselect-filter-element {
   width: 0.875rem;
   display: none;
 }
-.filtres .filtre-container .filtre-elements-section .selected-elements .selected:hover {
+.filtres .filter-area .filtre-container .filtre-elements-section .selected-elements .selected:hover {
   font-weight: 700;
 }
-.filtres .filtre-container .filtre-elements-section .selected-elements .selected:hover .unselect-filter-element {
+.filtres .filter-area .filtre-container .filtre-elements-section .selected-elements .selected:hover .unselect-filter-element {
   display: block;
   width: 0.875rem;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements li {
+.filtres .filter-area .filtre-container .filtre-elements-section .filtre-elements li {
+  cursor: pointer;
   padding: 5%;
   font-size: 0.875rem;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements li .unselect-filter-element {
+.filtres .filter-area .filtre-container .filtre-elements-section .filtre-elements li .unselect-filter-element {
   width: 0.875rem;
   display: none;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements li:hover {
+.filtres .filter-area .filtre-container .filtre-elements-section .filtre-elements li:hover {
   background-color: #ffd15b;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements .selected {
+.filtres .filter-area .filtre-container .filtre-elements-section .filtre-elements .selected {
   background-color: #ffd15b;
   padding: 5%;
   font-size: 0.875rem;
   display: flex;
   justify-content: space-between;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements .selected .unselect-filter-element {
+.filtres .filter-area .filtre-container .filtre-elements-section .filtre-elements .selected .unselect-filter-element {
   width: 0.875rem;
   display: none;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements .selected:hover {
+.filtres .filter-area .filtre-container .filtre-elements-section .filtre-elements .selected:hover {
   font-weight: 700;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements .selected:hover .unselect-filter-element {
+.filtres .filter-area .filtre-container .filtre-elements-section .filtre-elements .selected:hover .unselect-filter-element {
   display: block;
   width: 0.875rem;
 }
 
 .filter-tags {
+  cursor: pointer;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   margin-top: 20px;
   gap: 20px;
@@ -238,6 +249,7 @@
   align-items: center;
   gap: 20px;
   padding: 10px;
+  cursor: pointer;
 }
 .main-searchbar input {
   width: 100%;
@@ -246,6 +258,7 @@
   padding-left: 20px;
 }
 .main-searchbar .search-icon-container {
+  cursor: pointer;
   background-color: #1b1b1b;
   width: 52px;
   height: 52px;

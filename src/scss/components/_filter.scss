@@ -4,129 +4,138 @@
   display: flex;
   gap: 63px;
 
-  .filtre-container {
-    background-color: white;
-    border-radius: 11px;
-    max-width: 195px;
-    max-height: 56px;
-    height: 100%;
-    width: 100%;
-    font-size: 1rem;
-    overflow: hidden;
+  .filter-area {
     display: flex;
     flex-direction: column;
-
-    transition: max-height 0.3s ease;
-
-    &.open {
-      max-height: 315px;
-    }
-
-    .filtre-title {
-      height: 56px;
-      padding: 17px 16px;
-      font-size: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .arrow {
-        height: fit-content;
-        width: 1rem;
-        transition: transform 0.3s ease;
-      }
-      .rotate {
-        transform: rotate(180deg);
-      }
-    }
-
-    .filtre-searching {
-      padding: 0 10%;
-      height: 56px;
-      margin-bottom: 20px;
-
-      .filtre-searchbar {
-        display: flex;
-        border-radius: 2px;
-        border: solid 1px variables.$light-grey;
-        padding: 5%;
-        height: 2.25rem;
-
-        input {
-          width: 100%;
-          caret-color: variables.$light-grey;
-        }
-
-        svg {
-          height: fit-content;
-          width: 0.875rem;
-        }
-      }
-    }
-
-    .filtre-elements-section {
-      overflow-y: scroll;
-      scrollbar-width: none;
+    align-items: flex-start;
+    /* Permet à la hauteur de s'adapter au contenu */
+    min-height: 0;
+    .filtre-container {
+      background-color: white;
+      border-radius: 11px;
+      max-width: 195px;
+      max-height: 56px;
       height: 100%;
-      max-height: 259px;
+      width: 100%;
+      font-size: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
 
-      .selected-elements {
-        .selected {
-          background-color: variables.$yellow;
-          padding: 5%;
-          font-size: 0.875rem;
+      transition: max-height 0.3s ease;
+
+      &.open {
+        max-height: 315px;
+      }
+
+      .filtre-title {
+        cursor: pointer;
+        height: 56px;
+        padding: 17px 16px;
+        font-size: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .arrow {
+          height: fit-content;
+          width: 1rem;
+          transition: transform 0.3s ease;
+        }
+        .rotate {
+          transform: rotate(180deg);
+        }
+      }
+
+      .filtre-searching {
+        padding: 0 10%;
+        height: 56px;
+        margin-bottom: 10px;
+
+        .filtre-searchbar {
+          cursor: pointer;
           display: flex;
-          justify-content: space-between;
+          border-radius: 2px;
+          border: solid 1px variables.$light-grey;
+          padding: 5%;
+          height: 2.25rem;
 
-          .unselect-filter-element {
-            width: 0.875rem;
-            display: none;
+          input {
+            width: 100%;
+            caret-color: variables.$light-grey;
           }
 
-          &:hover {
-            font-weight: 700;
+          svg {
+            height: fit-content;
+            width: 0.875rem;
+          }
+        }
+      }
+
+      .filtre-elements-section {
+        overflow-y: scroll;
+        scrollbar-width: none;
+        max-height: 259px;
+
+        .selected-elements {
+          .selected {
+            background-color: variables.$yellow;
+            padding: 5%;
+            font-size: 0.875rem;
+            display: flex;
+            justify-content: space-between;
 
             .unselect-filter-element {
-              display: block;
               width: 0.875rem;
+              display: none;
+            }
+
+            &:hover {
+              font-weight: 700;
+
+              .unselect-filter-element {
+                display: block;
+                width: 0.875rem;
+              }
             }
           }
         }
-      }
 
-      .filtre-elements {
-        li {
-          padding: 5%;
-          font-size: 0.875rem;
-
-          .unselect-filter-element {
-            width: 0.875rem;
-            display: none;
-          }
-
-          &:hover {
-            background-color: variables.$yellow;
-          }
-        }
-
-        .selected {
-          background-color: variables.$yellow;
-          padding: 5%;
-          font-size: 0.875rem;
-          display: flex;
-          justify-content: space-between;
-
-          .unselect-filter-element {
-            width: 0.875rem;
-            display: none;
-          }
-
-          &:hover {
-            font-weight: 700;
+        .filtre-elements {
+          li {
+            cursor: pointer;
+            padding: 5%;
+            font-size: 0.875rem;
 
             .unselect-filter-element {
-              display: block;
               width: 0.875rem;
+              display: none;
+            }
+
+            &:hover {
+              background-color: variables.$yellow;
+            }
+          }
+
+          .selected {
+            background-color: variables.$yellow;
+            padding: 5%;
+            font-size: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+
+            .unselect-filter-element {
+              width: 0.875rem;
+              display: none;
+            }
+
+            &:hover {
+              font-weight: 700;
+
+              .unselect-filter-element {
+                display: block;
+                width: 0.875rem;
+              }
             }
           }
         }
@@ -136,7 +145,9 @@
 }
 
 .filter-tags {
+  cursor: pointer;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   margin-top: 20px;
   gap: 20px;
