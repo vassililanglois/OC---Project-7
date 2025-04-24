@@ -1,4 +1,5 @@
 import { recipes } from "../../data/recipes.js";
+import { fillFilters } from "../components/Filters.js";
 import { recipeFactory } from "../factories/recipeFactory.js";
 import RecipeCard from "../templates/RecipeCard.js";
 import { clearRecipes } from "../utils/clearRecipes.js";
@@ -11,6 +12,7 @@ class Index {
   // Initialisation de la page principale
   init() {
     this.displayRecipes(recipes); // Afficher toutes les recettes au chargement
+    fillFilters(recipes); // Remplir tous les filtres au chargement
   }
 
   // Fonction pour afficher les recettes

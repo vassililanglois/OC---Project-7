@@ -13,7 +13,7 @@ function getSearchResultsForFilter(inputId, filterItemsSelector) {
 
   filterItems.forEach((item) => {
     const itemName = item.textContent.trim().toLowerCase();
-    item.style.display = itemName.includes(searchTextQuery) ? "flex" : "none";
+    item.style.display = itemName.includes(searchTextQuery) ? "block" : "none";
   });
 }
 

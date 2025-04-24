@@ -6,6 +6,7 @@ import {
 } from "../utils/noRecipeFound.js";
 import { clearRecipes } from "../utils/clearRecipes.js";
 import { displayRecipes, setNumberOfRecipes } from "../pages/index.js";
+import { filterRecipesWithTags } from "./FiltersTags.js";
 
 export const globalSearchInput = document.querySelector("#global-search");
 
@@ -59,18 +60,11 @@ export function searchRecipes() {
     ? displayErrorMessage(globalInputValue)
     : eraseErrorMessage();
 
-  /*
   // ------ FILTRE RECETTES VIA LES TAGS ------
   // Si un tag est utilisé dans l'un des filtre
   if (tagsList.length > 0) {
-    recipesListToDisplay = filterRecipesWithTags(
-      recipesListToDisplay,
-      ingredientTagsList,
-      applianceTagsList,
-      ustensilTagsList
-    );
+    recipesListToDisplay = filterRecipesWithTags(recipesListToDisplay);
   }
-    */
 
   // Si aucun tag et aucune recherche globale => tout afficher
   if (globalSearchInput.value.length === 0 && tagsList.length === 0) {
