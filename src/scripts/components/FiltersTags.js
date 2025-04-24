@@ -2,29 +2,33 @@ import FilterTag from "../templates/FilterTag.js";
 import { searchRecipes } from "./GlobalSearch.js";
 
 // Ajouter un tag au container
-export function addTag(tagName) {
-  const tagContainer = document.querySelector(".filter-tags");
+export function addTag(tagName, type) {
+  const tagContainer = document.querySelector(`.${type}-tags`);
   const filterTag = new FilterTag(tagName);
   const tag = filterTag.getFilterTag();
 
   // Ajouter un gestionnaire d'événements pour le clic sur le SVG
   const svg = tag.querySelector("svg");
   svg.addEventListener("click", () => {
-    deleteTag(tag, tagContainer, tagName);
+    deleteTag(tag, tagContainer, tagName, type);
   });
 
   tagContainer.appendChild(tag); // Ajouter le tag au container
 }
 
-// Gérer l'animation de sortie
-function deleteTag(tag, tagContainer, tagName) {
+// Supprimer un tag
+function deleteTag(tag, tagContainer, tagName, type) {
   // Retirer la tag de son container
   tagContainer.removeChild(tag);
 
-  // Retirer la classe "selected" de l'élément correspondant dans les filtres
-  const filterItems = document.querySelectorAll(".filter-item");
+  // Retirer la classe "selected" de l'élément correspondant dans les filtres de la bonne catégorie
+  const filterItems = document.querySelectorAll(
+    `.filter-item[data-type="${type}"]`
+  );
   filterItems.forEach((item) => {
-    if (item.textContent.trim() === tagName) {
+    if (
+      item.textContent.trim().toLowerCase() === tagName.trim().toLowerCase()
+    ) {
       item.classList.remove("selected");
     }
   });
@@ -33,33 +37,49 @@ function deleteTag(tag, tagContainer, tagName) {
   searchRecipes();
 }
 
+// Filtre les recettes affichées avec des tags
 export function filterRecipesWithTags(recipesToFilter) {
-  const tagElements = document.querySelectorAll(
-    ".filter-tags .filtre-element-tag"
+  const ingredientsTags = document.querySelectorAll(
+    ".ingredients-tags .filtre-element-tag"
   );
-  const tags = Array.from(tagElements).map((tag) =>
+  const appliancesTags = document.querySelectorAll(
+    ".appliances-tags .filtre-element-tag"
+  );
+  const ustensilsTags = document.querySelectorAll(
+    ".ustensils-tags .filtre-element-tag"
+  );
+
+  const ingredients = Array.from(ingredientsTags).map((tag) =>
+    tag.textContent.trim().toLowerCase()
+  );
+  const appliances = Array.from(appliancesTags).map((tag) =>
+    tag.textContent.trim().toLowerCase()
+  );
+  const ustensils = Array.from(ustensilsTags).map((tag) =>
     tag.textContent.trim().toLowerCase()
   );
 
-  if (tags.length === 0) return recipesToFilter;
+  if (
+    ingredients.length === 0 &&
+    appliances.length === 0 &&
+    ustensils.length === 0
+  )
+    return recipesToFilter;
 
   return recipesToFilter.filter((recipe) => {
-    // Pour chaque tag, il faut que la recette le contienne dans au moins un champ
-    return tags.every((tag) => {
-      // Vérifie dans les ingrédients
-      const inIngredients = recipe.ingredients.some(({ ingredient }) =>
+    const hasAllIngredients = ingredients.every((tag) =>
+      recipe.ingredients.some(({ ingredient }) =>
         ingredient.toLowerCase().includes(tag)
-      );
-      // Vérifie dans les ustensiles
-      const inUstensils = Array.isArray(recipe.ustensils)
-        ? recipe.ustensils.some((u) => u.toLowerCase().includes(tag))
-        : false;
-      // Vérifie dans l'appliance
-      const inAppliance = recipe.appliance
-        ? recipe.appliance.toLowerCase().includes(tag)
-        : false;
-
-      return inIngredients || inUstensils || inAppliance;
-    });
+      )
+    );
+    const hasAllAppliances = appliances.every(
+      (tag) => recipe.appliance && recipe.appliance.toLowerCase().includes(tag)
+    );
+    const hasAllUstensils = ustensils.every(
+      (tag) =>
+        Array.isArray(recipe.ustensils) &&
+        recipe.ustensils.some((u) => u.toLowerCase().includes(tag))
+    );
+    return hasAllIngredients && hasAllAppliances && hasAllUstensils;
   });
 }

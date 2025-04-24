@@ -35,7 +35,11 @@ class Index {
 // Fonction pour mettre à jour le nombre de recettes affichées
 export function setNumberOfRecipes(list) {
   const numberOfRecipes = document.querySelector(".nombre-recettes");
-  if (numberOfRecipes) {
+
+  // Gestion du singulier si il n'y a qu'une seule recette dans la liste
+  if (list.length === 1) {
+    numberOfRecipes.textContent = `${list.length} recette`;
+  } else {
     numberOfRecipes.textContent = `${list.length} recettes`;
   }
 }

@@ -74,64 +74,61 @@ export function fillFilters(recipes) {
   // Remplir les ingrédients
   ingredients.forEach((el) => {
     const filterItem = createFilterOption(el);
-    handleFilterOptionClick(filterItem, el);
-    handleUnselectSvgClick(filterItem, el);
+    handleFilterOptionClick(filterItem, el, "ingredients");
+    handleUnselectSvgClick(filterItem, el, "ingredients");
     containers.ingredients.appendChild(filterItem);
   });
 
   // Remplir les appareils
   appliances.forEach((el) => {
     const filterItem = createFilterOption(el);
-    handleFilterOptionClick(filterItem, el);
-    handleUnselectSvgClick(filterItem, el);
+    handleFilterOptionClick(filterItem, el, "appliances");
+    handleUnselectSvgClick(filterItem, el, "appliances");
     containers.appliances.appendChild(filterItem);
   });
 
   // Remplir les ustensiles
   ustensils.forEach((el) => {
     const filterItem = createFilterOption(el);
-    handleFilterOptionClick(filterItem, el);
-    handleUnselectSvgClick(filterItem, el);
+    handleFilterOptionClick(filterItem, el, "ustensils");
+    handleUnselectSvgClick(filterItem, el, "ustensils");
     containers.ustensils.appendChild(filterItem);
   });
 }
 
-function handleFilterOptionClick(filterItem, el) {
+function handleFilterOptionClick(filterItem, el, type) {
   filterItem.addEventListener("click", (event) => {
-    // Si le clic vient du SVG de suppression, ne rien faire
     if (
-      event.target.classList.contains("unselect-filter-element") ||
-      event.target.closest(".unselect-filter-element")
+      (event.target.classList.contains("unselect-filter-element") ||
+        event.target.closest(".unselect-filter-element")) &&
+      window.getComputedStyle(event.target).display !== "none"
     ) {
       return;
     }
 
-    // On ajoute la classe selected seulement si elle n'est pas déjà présente
     if (!filterItem.classList.contains("selected")) {
       filterItem.classList.add("selected");
 
-      const tagContainer = document.querySelector(".filter-tags");
-      // Comparaison insensible à la casse et aux espaces
+      const tagContainer = document.querySelector(`.${type}-tags`);
       const tagExists = Array.from(tagContainer.children).some(
         (tag) =>
           tag.textContent.trim().toLowerCase() === el.trim().toLowerCase()
       );
       if (!tagExists) {
-        addTag(el);
+        addTag(el, type);
       }
     }
     searchRecipes();
   });
 }
 
-function handleUnselectSvgClick(filterItem, el) {
+function handleUnselectSvgClick(filterItem, el, type) {
   const unselectSvg = filterItem.querySelector(".unselect-filter-element");
   if (!unselectSvg) return;
   unselectSvg.addEventListener("click", (event) => {
     event.stopPropagation();
     filterItem.classList.remove("selected");
-    const tagContainer = document.querySelector(".filter-tags");
-    // Comparaison insensible à la casse et aux espaces
+    const tagContainer = document.querySelector(`.${type}-tags`);
     const tagToRemove = Array.from(tagContainer.children).find(
       (tag) => tag.textContent.trim().toLowerCase() === el.trim().toLowerCase()
     );
