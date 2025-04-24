@@ -5,6 +5,10 @@
   border-radius: 21px;
   background-color: white;
   position: relative;
+  transition: transform 200ms ease;
+}
+.recette:hover {
+  transform: scale(1.01);
 }
 .recette p {
   font-size: 0.875rem;
@@ -143,15 +147,15 @@
   display: block;
   width: 0.875rem;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements div {
+.filtres .filtre-container .filtre-elements-section .filtre-elements li {
   padding: 5%;
   font-size: 0.875rem;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements div .unselect-filter-element {
+.filtres .filtre-container .filtre-elements-section .filtre-elements li .unselect-filter-element {
   width: 0.875rem;
   display: none;
 }
-.filtres .filtre-container .filtre-elements-section .filtre-elements div:hover {
+.filtres .filtre-container .filtre-elements-section .filtre-elements li:hover {
   background-color: #ffd15b;
 }
 .filtres .filtre-container .filtre-elements-section .filtre-elements .selected {
