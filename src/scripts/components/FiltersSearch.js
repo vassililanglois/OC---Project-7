@@ -1,54 +1,44 @@
-import { getFiltersElements, fillFilters } from "./Filters.js";
-import { recipes } from "/src/data/recipes.js";
+// Sélection des inputs de recherche de chaque filtre
+const inputIngredients = document.querySelector("#searchbar-ingredients");
+const inputAppliances = document.querySelector("#searchbar-appliances");
+const inputUstensils = document.querySelector("#searchbar-ustensils");
 
-// Sélectionner les barres de recherche et les containers correspondants
-const searchbars = {
-  ingredients: document.getElementById("searchbar-ingredients"),
-  appliances: document.getElementById("searchbar-appliances"),
-  ustensils: document.getElementById("searchbar-ustensils"),
-};
+// Affiche ou cache les élements correspondant à la recherche
+function getSearchResultsForFilter(inputId, filterItemsSelector) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
 
-const containers = {
-  ingredients: document.querySelector(".filtre-elements.filtre-ingredients"),
-  appliances: document.querySelector(".filtre-elements.filtre-appliances"),
-  ustensils: document.querySelector(".filtre-elements.filtre-ustensils"),
-};
+  const searchTextQuery = input.value.trim().toLowerCase();
+  const filterItems = document.querySelectorAll(filterItemsSelector);
 
-// Récupérer les listes des filtres
-const { allIngredients, allAppliances, allUstensils } =
-  getFiltersElements(recipes);
-
-const originalLists = {
-  ingredients: allIngredients,
-  appliances: allAppliances,
-  ustensils: allUstensils,
-};
-
-// Fonction pour rechercher dans les filtres
-function filterSearch(input, originalList, container) {
-  input.addEventListener("input", () => {
-    const keyword = input.value.trim().toLowerCase();
-    const selectedItems = Array.from(
-      container.querySelectorAll(".filter-item.selected")
-    ).map((item) => item.textContent.trim());
-
-    const filteredList = originalList.filter((item) =>
-      item.toLowerCase().includes(keyword)
-    );
-
-    const finalList = [...new Set([...selectedItems, ...filteredList])];
-    fillFilters(finalList, container);
-
-    selectedItems.forEach((selected) => {
-      const matchingItem = container.querySelector(
-        `.filter-item:contains("${selected}")`
-      );
-      if (matchingItem) matchingItem.classList.add("selected");
-    });
+  filterItems.forEach((item) => {
+    const itemName = item.textContent.trim().toLowerCase();
+    item.style.display = itemName.includes(searchTextQuery) ? "flex" : "none";
   });
 }
 
-// Initialiser la recherche pour chaque filtre
-Object.keys(searchbars).forEach((key) => {
-  filterSearch(searchbars[key], originalLists[key], containers[key]);
-});
+// Ajout des écouteurs d'événements sur chaque input
+if (inputIngredients) {
+  inputIngredients.addEventListener("input", () => {
+    getSearchResultsForFilter(
+      "searchbar-ingredients",
+      ".filtre-elements.filtre-ingredients .filter-item"
+    );
+  });
+}
+if (inputAppliances) {
+  inputAppliances.addEventListener("input", () => {
+    getSearchResultsForFilter(
+      "searchbar-appliances",
+      ".filtre-elements.filtre-appliances .filter-item"
+    );
+  });
+}
+if (inputUstensils) {
+  inputUstensils.addEventListener("input", () => {
+    getSearchResultsForFilter(
+      "searchbar-ustensils",
+      ".filtre-elements.filtre-ustensils .filter-item"
+    );
+  });
+}
