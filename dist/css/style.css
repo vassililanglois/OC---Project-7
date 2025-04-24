@@ -137,6 +137,9 @@
   scrollbar-width: none;
   max-height: 259px;
 }
+.filtres .filter-area .filtre-container .filtre-elements-section .selected-elements {
+  margin-bottom: 10px;
+}
 .filtres .filter-area .filtre-container .filtre-elements-section .selected-elements .selected {
   background-color: #ffd15b;
   padding: 5%;

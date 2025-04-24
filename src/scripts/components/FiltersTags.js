@@ -1,4 +1,5 @@
 import FilterTag from "../templates/FilterTag.js";
+import { unselectFilter } from "./Filters.js";
 import { searchRecipes } from "./GlobalSearch.js";
 
 // Ajouter un tag au container
@@ -10,31 +11,10 @@ export function addTag(tagName, type) {
   // Ajouter un gestionnaire d'événements pour le clic sur le SVG
   const svg = tag.querySelector("svg");
   svg.addEventListener("click", () => {
-    deleteTag(tag, tagContainer, tagName, type);
+    unselectFilter(tagName, type);
   });
 
   tagContainer.appendChild(tag); // Ajouter le tag au container
-}
-
-// Supprimer un tag
-function deleteTag(tag, tagContainer, tagName, type) {
-  // Retirer la tag de son container
-  tagContainer.removeChild(tag);
-
-  // Retirer la classe "selected" de l'élément correspondant dans les filtres de la bonne catégorie
-  const filterItems = document.querySelectorAll(
-    `.filter-item[data-type="${type}"]`
-  );
-  filterItems.forEach((item) => {
-    if (
-      item.textContent.trim().toLowerCase() === tagName.trim().toLowerCase()
-    ) {
-      item.classList.remove("selected");
-    }
-  });
-
-  // Render les recettes à la suppression du tag
-  searchRecipes();
 }
 
 // Filtre les recettes affichées avec des tags
