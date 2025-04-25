@@ -78,7 +78,6 @@
         max-height: 259px;
 
         .selected-elements {
-          margin-bottom: 10px;
           .selected {
             background-color: variables.$yellow;
             padding: 5%;
@@ -154,7 +153,7 @@
   gap: 20px;
   width: 100%;
   .filtre-element-tag {
-    width: 195px;
+    max-width: 195px;
     background-color: variables.$yellow;
     padding: 17px 18px;
     font-size: 0.875rem;
@@ -165,6 +164,47 @@
 
     svg {
       width: 0.875rem;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .filtres {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-tags {
+    margin: 10px 0;
+  }
+
+  .filtres {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+@media (max-width: 425px) {
+  .filtres {
+    width: 100%;
+
+    .filter-area {
+      .filtre-container {
+        max-width: 100%;
+
+        .filtre-searching {
+          padding: 0 5%;
+
+          .filtre-searchbar {
+            /* padding: 5%; */
+            padding: 3%;
+          }
+        }
+      }
+    }
+
+    .filter-tags .filtre-element-tag {
+      max-width: 100%;
     }
   }
 }

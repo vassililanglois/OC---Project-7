@@ -49,3 +49,31 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .main-searchbar {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-searchbar {
+    height: 50px;
+    padding: 6px;
+
+    input {
+      padding-left: 10px;
+      font-size: 0.75rem;
+    }
+    .search-icon-container {
+      width: 40px;
+      height: 40px;
+      svg {
+        width: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 425px) {
+}

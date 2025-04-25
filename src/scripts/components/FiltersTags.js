@@ -1,52 +1,33 @@
 import FilterTag from "../templates/FilterTag.js";
 import { unselectFilter } from "./Filters.js";
-import { searchRecipes } from "./GlobalSearch.js";
 
-// Ajouter un tag au container
+// Ajoute un tag au container et gère le clic sur la croix
 export function addTag(tagName, type) {
   const tagContainer = document.querySelector(`.${type}-tags`);
-  const filterTag = new FilterTag(tagName);
-  const tag = filterTag.getFilterTag();
-
-  // Ajouter un gestionnaire d'événements pour le clic sur le SVG
-  const svg = tag.querySelector("svg");
-  svg.addEventListener("click", () => {
-    unselectFilter(tagName, type);
-  });
-
-  tagContainer.appendChild(tag); // Ajouter le tag au container
+  const tag = new FilterTag(tagName).getFilterTag();
+  tag
+    .querySelector("svg")
+    .addEventListener("click", () => unselectFilter(tagName, type));
+  tagContainer.appendChild(tag);
 }
 
-// Filtre les recettes affichées avec des tags
-export function filterRecipesWithTags(recipesToFilter) {
-  const ingredientsTags = document.querySelectorAll(
-    ".ingredients-tags .filtre-element-tag"
-  );
-  const appliancesTags = document.querySelectorAll(
-    ".appliances-tags .filtre-element-tag"
-  );
-  const ustensilsTags = document.querySelectorAll(
-    ".ustensils-tags .filtre-element-tag"
-  );
+// Récupère tous les tags d'un type donné (ingredients, appliances, ustensils)
+function getTags(type) {
+  return Array.from(
+    document.querySelectorAll(`.${type}-tags .filtre-element-tag`)
+  ).map((tag) => tag.textContent.trim().toLowerCase());
+}
 
-  const ingredients = Array.from(ingredientsTags).map((tag) =>
-    tag.textContent.trim().toLowerCase()
-  );
-  const appliances = Array.from(appliancesTags).map((tag) =>
-    tag.textContent.trim().toLowerCase()
-  );
-  const ustensils = Array.from(ustensilsTags).map((tag) =>
-    tag.textContent.trim().toLowerCase()
-  );
+// Filtre les recettes selon les tags sélectionnés
+export function filterRecipesWithTags(recipes) {
+  const ingredients = getTags("ingredients");
+  const appliances = getTags("appliances");
+  const ustensils = getTags("ustensils");
 
-  if (
-    ingredients.length === 0 &&
-    appliances.length === 0 &&
-    ustensils.length === 0
-  )
-    return recipesToFilter;
+  if (!ingredients.length && !appliances.length && !ustensils.length)
+    return recipes;
 
-  return recipesToFilter.filter((recipe) => {
+  return recipes.filter((recipe) => {
     const hasAllIngredients = ingredients.every((tag) =>
       recipe.ingredients.some(({ ingredient }) =>
         ingredient.toLowerCase().includes(tag)

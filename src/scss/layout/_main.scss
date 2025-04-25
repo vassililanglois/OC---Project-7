@@ -47,3 +47,14 @@ main {
     gap: 48px;
   }
 }
+
+@media (max-width: 1024px) {
+  .section-filtres {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .nombre-recettes {
+    align-self: flex-end;
+  }
+}

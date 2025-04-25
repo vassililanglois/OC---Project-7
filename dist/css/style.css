@@ -137,9 +137,6 @@
   scrollbar-width: none;
   max-height: 259px;
 }
-.filtres .filter-area .filtre-container .filtre-elements-section .selected-elements {
-  margin-bottom: 10px;
-}
 .filtres .filter-area .filtre-container .filtre-elements-section .selected-elements .selected {
   background-color: #ffd15b;
   padding: 5%;
@@ -199,7 +196,7 @@
   width: 100%;
 }
 .filter-tags .filtre-element-tag {
-  width: 195px;
+  max-width: 195px;
   background-color: #ffd15b;
   padding: 17px 18px;
   font-size: 0.875rem;
@@ -212,6 +209,38 @@
   width: 0.875rem;
 }
 
+@media (max-width: 1024px) {
+  .filtres {
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .filter-tags {
+    margin: 10px 0;
+  }
+  .filtres {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+@media (max-width: 425px) {
+  .filtres {
+    width: 100%;
+  }
+  .filtres .filter-area .filtre-container {
+    max-width: 100%;
+  }
+  .filtres .filter-area .filtre-container .filtre-searching {
+    padding: 0 5%;
+  }
+  .filtres .filter-area .filtre-container .filtre-searching .filtre-searchbar {
+    /* padding: 5%; */
+    padding: 3%;
+  }
+  .filtres .filter-tags .filtre-element-tag {
+    max-width: 100%;
+  }
+}
 .tag-enter {
   animation: tagScaleIn 0.1s ease-in-out; /* Durée et type d'animation */
 }
@@ -284,6 +313,28 @@
   stroke: #1b1b1b;
 }
 
+@media (max-width: 1024px) {
+  .main-searchbar {
+    width: 90%;
+  }
+}
+@media (max-width: 768px) {
+  .main-searchbar {
+    height: 50px;
+    padding: 6px;
+  }
+  .main-searchbar input {
+    padding-left: 10px;
+    font-size: 0.75rem;
+  }
+  .main-searchbar .search-icon-container {
+    width: 40px;
+    height: 40px;
+  }
+  .main-searchbar .search-icon-container svg {
+    width: 20px;
+  }
+}
 /***** Config *****/
 *,
 *::before,
@@ -374,6 +425,27 @@ header h1 {
   font-family: "Anton", sans-serif;
 }
 
+@media (max-width: 768px) {
+  header {
+    height: 400px;
+  }
+  header .logo {
+    width: 8rem;
+    top: 20px;
+    left: 30px;
+  }
+  header h1 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 425px) {
+  header {
+    height: 300px;
+  }
+  header h1 {
+    font-size: 1.2rem;
+  }
+}
 /***** Main *****/
 main .main-container {
   display: flex;
@@ -413,6 +485,16 @@ main .section-recettes {
   margin-top: 25px;
   margin-bottom: 48px;
   gap: 48px;
+}
+
+@media (max-width: 1024px) {
+  .section-filtres {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  .nombre-recettes {
+    align-self: flex-end;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
