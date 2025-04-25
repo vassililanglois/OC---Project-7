@@ -12,24 +12,33 @@ export const globalSearchInput = document.querySelector("#global-search");
 
 function filterRecipesWithGlobalInput(recipesTofilter, inputValue) {
   const inputValueFormatted = inputValue.trim().toLowerCase();
+  const recipesListToDisplay = [];
 
-  const recipesListToDisplay = recipesTofilter.filter((recipe) => {
+  for (const recipe of recipesTofilter) {
     let recipeIsMatching = false;
-    // Vérifie si la valeur saisie correspond à un titre, à la description ou à un ingrédient de la carte
+
+    // Vérifie le nom et la description
     if (
       recipe.name.toLowerCase().includes(inputValueFormatted) ||
       recipe.description.toLowerCase().includes(inputValueFormatted)
     ) {
       recipeIsMatching = true;
     }
-    recipe.ingredients.forEach(({ ingredient }) => {
-      const ingredientNameFormatted = ingredient.toLowerCase();
+
+    // Vérifie les ingrédients
+    for (const ingredientObj of recipe.ingredients) {
+      const ingredientNameFormatted = ingredientObj.ingredient.toLowerCase();
       if (ingredientNameFormatted.includes(inputValueFormatted)) {
         recipeIsMatching = true;
+        break; // On peut sortir dès qu'un ingrédient correspond
       }
-    });
-    return recipeIsMatching;
-  });
+    }
+
+    if (recipeIsMatching) {
+      recipesListToDisplay.push(recipe);
+    }
+  }
+
   return recipesListToDisplay;
 }
 
