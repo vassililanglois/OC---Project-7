@@ -5,7 +5,7 @@ import {
   eraseErrorMessage,
 } from "../utils/noRecipeFound.js";
 import { clearRecipes } from "../utils/clearRecipes.js";
-import { displayRecipes, setNumberOfRecipes } from "../pages/index.js";
+import { displayRecipes } from "../pages/index.js";
 import { filterRecipesWithTags } from "./FiltersTags.js";
 
 export const globalSearchInput = document.querySelector("#global-search");
